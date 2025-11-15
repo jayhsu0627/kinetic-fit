@@ -88,6 +88,31 @@ zipalign -v 4 kinetic-fit-bypass.apk kinetic-fit-bypass-aligned.apk
 
 ⚠️ **Important**: The build process requires the `--use-aapt2` flag. Without it, the build will fail with resource compilation errors. This is due to compatibility issues between the decompiled resources and the older `aapt` tool.
 
+### Installation
+
+**Signing the APK**:
+```bash
+# Create debug keystore (if not exists)
+keytool -genkey -v -keystore ~/.android/debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
+
+# Sign the APK
+jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore ~/.android/debug.keystore -storepass android -keypass android kinetic-fit-bypass.apk androiddebugkey
+
+# Verify signature
+jarsigner -verify kinetic-fit-bypass.apk
+```
+
+**Installing on Device**:
+```bash
+# If previous version exists with different signature, uninstall first
+adb uninstall com.kinetic.fit
+
+# Install the new APK
+adb install kinetic-fit-bypass.apk
+```
+
+**Note**: If you get `INSTALL_FAILED_UPDATE_INCOMPATIBLE`, the existing app was signed with a different key. Uninstall the old version first, then install the new one.
+
 ## 🔓 Login Bypass Modifications
 
 This repository includes modifications to bypass the login requirement, as the original company has defunct and authentication servers are no longer available. These changes allow the app to function without requiring server-side authentication.
@@ -131,6 +156,23 @@ The bypass creates a pseudo-user profile with the following details:
 - ⚠️ The modifications allow offline use of the app since authentication servers are unavailable
 - ⚠️ User profile synchronization functionality has been disabled
 - ⚠️ Some features that require server-side authentication may not work
+
+### Testing Results
+
+✅ **Verified Working**:
+- App launches successfully without login screen
+- Bypasses authentication and synchronization screens
+- Opens directly to main interface (RootActivity)
+- Admin profile is automatically created
+
+⚠️ **Known Issues**:
+- **Bluetooth Device Detection**: Some Bluetooth trainer devices (e.g., Kinetic T-6400, shown as 'Kinetic 3D:FD' in Bluetooth settings) may not appear in the app's device list even when connected via phone Bluetooth settings. This may be due to:
+  - Missing or incompatible BLE (Bluetooth Low Energy) service discovery
+  - Device pairing requirements that differ from standard Bluetooth pairing
+  - App-specific device filtering or discovery protocols
+  - Potential need for additional permissions or service configurations
+  
+  **Workaround**: The device may need to be discovered/paired directly through the app's sensor discovery feature rather than through system Bluetooth settings.
 
 ### Rebuilding with Bypass
 
