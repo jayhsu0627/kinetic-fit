@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <include android:id="@id/footer" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" layout="@layout/footer_buttons" />
+        <LinearLayout android:orientation="vertical" android:id="@id/training_plan_overview_layout" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/footer">
+            <RelativeLayout android:id="@id/name_layout" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="20.0sp" android:textColor="?colorFitPrimary" android:ellipsize="marquee" android:id="@id/mPlanName" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:text="Training Plan Name Here asdf asdf asdf asdf a" android:scrollHorizontally="true" android:singleLine="true" android:marqueeRepeatLimit="marquee_forever" android:layout_marginStart="16.0dip" android:layout_alignParentStart="true" />
+                <TextView android:textSize="16.0sp" android:id="@id/mPlanAuthor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="created by someone" android:layout_below="@id/mPlanName" android:layout_marginStart="24.0dip" android:layout_alignParentStart="true" />
+                <TextView android:textSize="16.0sp" android:id="@id/mPlanDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="8.0dip" android:text="4 weeks" android:layout_below="@id/mPlanAuthor" android:textAlignment="center" android:layout_marginStart="24.0sp" android:layout_alignParentStart="true" />
+                <ImageView android:id="@id/mVolumeIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" android:src="@mipmap/training_plan_cardio_icon" android:scaleType="fitCenter" android:layout_below="@id/mPlanName" android:layout_marginEnd="8.0dip" android:layout_alignParentEnd="true" />
+                <ImageView android:id="@id/mExperienceIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" android:src="@mipmap/training_plan_cardio_icon" android:scaleType="fitCenter" android:layout_below="@id/mPlanName" android:layout_marginEnd="8.0dip" android:layout_toStartOf="@id/mVolumeIcon" />
+                <ImageView android:id="@id/mCategoryIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" android:src="@mipmap/training_plan_cardio_icon" android:layout_below="@id/mPlanName" android:layout_marginEnd="8.0dip" android:layout_toStartOf="@id/mExperienceIcon" />
+            </RelativeLayout>
+            <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                        <TextView android:textSize="20.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="TARGET RIDER" />
+                        <TextView android:id="@id/mTargetRiderText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                        <TextView android:textSize="20.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="OVERVIEW" />
+                        <TextView android:id="@id/mPlanOverviewText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                        <TextView android:textSize="20.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="GOALS" />
+                        <TextView android:id="@id/mPlanGoalsText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:padding="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                        <com.kinetic.fit.ui.widget.FitButton android:textColor="?colorFitPrimary" android:background="@drawable/border_tblr_green_square" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Add to Calendar" app:buttonType="disabled"
+                          xmlns:app="http://schemas.android.com/apk/res/com.kinetic.fit" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0dip" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

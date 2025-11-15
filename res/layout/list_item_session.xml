@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/history_linear_layout" android:background="?colorFitBg0" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="4.0dip" android:hapticFeedbackEnabled="true" android:elevation="4.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="13.0sp" android:gravity="left" android:id="@id/list_item_session_date" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Workout Date" />
+    <TextView android:textSize="20.0sp" android:textColor="?colorFitHeadline" android:gravity="left" android:id="@id/list_item_session_name" android:paddingLeft="20.0dip" android:paddingTop="8.0dip" android:paddingRight="20.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Workout Name" />
+    <LinearLayout android:orientation="vertical" android:paddingLeft="20.0dip" android:paddingTop="8.0dip" android:paddingRight="20.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="13.0sp" android:gravity="end" android:layout_gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="IF" android:layout_weight="1.0" android:layout_marginEnd="8.0dip" />
+            <TextView android:textSize="18.0sp" android:textStyle="bold" android:id="@id/list_item_session_if" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="0.57" android:layout_weight="2.0" android:layout_marginEnd="20.0dip" />
+            <ImageView android:layout_gravity="center" android:padding="2.0dip" android:layout_width="20.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_time" android:tint="?colorFitPrimary" android:layout_marginEnd="4.0dip" />
+            <TextView android:textSize="13.0sp" android:textColor="?colorFitBody" android:layout_gravity="center_vertical" android:id="@id/list_item_session_duration" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="00:00:00" android:layout_weight="3.0" />
+            <ImageView android:layout_gravity="center" android:padding="2.0dip" android:layout_width="20.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_distance" android:tint="?colorFitPrimary" android:layout_marginEnd="4.0dip" />
+            <TextView android:textSize="13.0sp" android:textColor="?colorFitBody" android:layout_gravity="center_vertical" android:id="@id/list_item_session_distance" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="0.00 mi" android:layout_weight="3.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="13.0sp" android:gravity="end" android:layout_gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="TSS" android:layout_weight="1.0" android:layout_marginEnd="8.0dip" />
+            <TextView android:textSize="18.0sp" android:textStyle="bold" android:id="@id/list_item_session_tss" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="100" android:layout_weight="2.0" android:layout_marginEnd="20.0dip" />
+            <ImageView android:layout_gravity="center" android:padding="2.0dip" android:layout_width="20.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_power" android:tint="?colorFitPrimary" android:layout_marginEnd="4.0dip" />
+            <TextView android:textSize="13.0sp" android:textColor="?colorFitBody" android:layout_gravity="center_vertical" android:id="@id/list_item_session_watts" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="0.00 kJ" android:layout_weight="3.0" />
+            <ImageView android:layout_gravity="center" android:padding="2.0dip" android:layout_width="20.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_heart" android:tint="?colorFitPrimary" android:layout_marginEnd="4.0dip" />
+            <TextView android:textSize="13.0sp" android:textColor="?colorFitBody" android:layout_gravity="center_vertical" android:id="@id/list_item_session_bpm" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="---" android:layout_weight="3.0" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

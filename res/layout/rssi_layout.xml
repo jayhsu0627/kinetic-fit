@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/signal1" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/rssi_dot" android:backgroundTint="?colorFitPrimary" app:layout_constraintHeight_default="percent" app:layout_constraintHeight_percent="0.25" app:layout_constraintTop_toBottomOf="@id/signal2" />
+    <ImageView android:id="@id/signal2" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/rssi_dot" android:backgroundTint="?colorFitPrimary" app:layout_constraintHeight_default="percent" app:layout_constraintHeight_percent="0.25" app:layout_constraintTop_toBottomOf="@id/signal3" />
+    <ImageView android:id="@id/signal3" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/rssi_dot" android:backgroundTint="?colorFitPrimary" app:layout_constraintHeight_default="percent" app:layout_constraintHeight_percent="0.25" app:layout_constraintTop_toBottomOf="@id/signal4" />
+    <ImageView android:id="@id/signal4" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/rssi_dot" android:backgroundTint="?colorFitPrimary" app:layout_constraintHeight_default="percent" app:layout_constraintHeight_percent="0.25" app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

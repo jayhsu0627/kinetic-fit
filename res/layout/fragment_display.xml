@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginTop="4.0dip" android:layout_weight="1.0" android:layout_marginStart="4.0dip" android:layout_marginEnd="4.0dip">
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display1" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display2" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display3" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" android:layout_marginStart="4.0dip" android:layout_marginEnd="4.0dip">
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display4" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display5" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display6" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginBottom="4.0dip" android:layout_weight="1.0" android:layout_marginStart="4.0dip" android:layout_marginEnd="4.0dip">
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display7" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display8" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <com.kinetic.fit.ui.widget.DisplayViewWidget android:id="@id/display9" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        </LinearLayout>
+    </LinearLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0dip" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

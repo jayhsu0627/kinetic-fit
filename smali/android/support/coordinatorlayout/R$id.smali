@@ -1,0 +1,97 @@
+.class public final Landroid/support/coordinatorlayout/R$id;
+.super Ljava/lang/Object;
+.source "R.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Landroid/support/coordinatorlayout/R;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x19
+    name = "id"
+.end annotation
+
+
+# static fields
+.field public static final action_container:I = 0x7f09000e
+
+.field public static final action_divider:I = 0x7f090011
+
+.field public static final action_image:I = 0x7f090018
+
+.field public static final action_text:I = 0x7f090020
+
+.field public static final actions:I = 0x7f090021
+
+.field public static final async:I = 0x7f09004b
+
+.field public static final blocking:I = 0x7f090065
+
+.field public static final bottom:I = 0x7f090067
+
+.field public static final chronometer:I = 0x7f0900a4
+
+.field public static final end:I = 0x7f0900eb
+
+.field public static final forever:I = 0x7f090106
+
+.field public static final icon:I = 0x7f090143
+
+.field public static final icon_group:I = 0x7f090144
+
+.field public static final info:I = 0x7f090154
+
+.field public static final italic:I = 0x7f09015a
+
+.field public static final left:I = 0x7f090173
+
+.field public static final line1:I = 0x7f090179
+
+.field public static final line3:I = 0x7f09017b
+
+.field public static final none:I = 0x7f090208
+
+.field public static final normal:I = 0x7f090209
+
+.field public static final notification_background:I = 0x7f09020b
+
+.field public static final notification_main_column:I = 0x7f09020c
+
+.field public static final notification_main_column_container:I = 0x7f09020d
+
+.field public static final right:I = 0x7f09029c
+
+.field public static final right_icon:I = 0x7f09029e
+
+.field public static final right_side:I = 0x7f09029f
+
+.field public static final start:I = 0x7f0902f4
+
+.field public static final tag_transition_group:I = 0x7f090307
+
+.field public static final tag_unhandled_key_event_manager:I = 0x7f090308
+
+.field public static final tag_unhandled_key_listeners:I = 0x7f090309
+
+.field public static final text:I = 0x7f09030e
+
+.field public static final text2:I = 0x7f09030f
+
+.field public static final time:I = 0x7f09031f
+
+.field public static final title:I = 0x7f090321
+
+.field public static final top:I = 0x7f090328
+
+
+# direct methods
+.method private constructor <init>()V
+    .locals 0
+
+    .line 88
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method

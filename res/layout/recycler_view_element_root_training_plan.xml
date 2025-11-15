@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="14.0sp" android:id="@id/training_plan_title" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="title" android:textAllCaps="true" android:layout_marginStart="4.0dip" />
+    <ProgressBar android:id="@id/training_plan_progress_bar" android:layout_width="fill_parent" android:layout_height="4.0dip" android:layout_margin="4.0dip" android:layout_below="@id/training_plan_title" android:progressTint="?colorFitPrimary" style="@android:style/Widget.ProgressBar.Horizontal" />
+    <TextView android:textSize="20.0sp" android:textColor="?colorFitHeadline" android:id="@id/training_plan_headline" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/training_plan_progress_bar" android:layout_marginStart="4.0dip" />
+    <TextView android:id="@id/training_plan_day_message" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:layout_below="@id/training_plan_headline" android:layout_marginStart="4.0dip" />
+    <com.kinetic.fit.ui.widget.FitButton android:textSize="18.0sp" android:id="@id/training_plan_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="16.0dip" android:text="start training plan" android:layout_below="@id/training_plan_day_message" android:textAllCaps="false" />
+</RelativeLayout>

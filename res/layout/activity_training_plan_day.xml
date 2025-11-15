@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <include android:id="@id/footer" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" layout="@layout/footer_buttons" />
+        <LinearLayout android:orientation="vertical" android:id="@id/training_plan_day_layout" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/footer">
+            <RelativeLayout android:id="@id/name_layout" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="20.0sp" android:textColor="?colorFitPrimary" android:ellipsize="marquee" android:id="@id/planName" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:text="Training Plan Name Here asdf asdf asdf asdf a" android:scrollHorizontally="true" android:singleLine="true" android:marqueeRepeatLimit="marquee_forever" android:layout_marginStart="16.0dip" android:layout_alignParentStart="true" />
+                <TextView android:textSize="16.0sp" android:id="@id/creatorName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="created by someone" android:layout_below="@id/planName" android:layout_marginStart="24.0dip" android:layout_alignParentStart="true" />
+                <TextView android:textSize="16.0sp" android:id="@id/planDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="8.0dip" android:text="4 weeks" android:layout_below="@id/creatorName" android:textAlignment="center" android:layout_marginStart="24.0sp" android:layout_alignParentStart="true" />
+                <ImageView android:id="@id/volumeIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" android:src="@mipmap/training_plan_cardio_icon" android:scaleType="fitCenter" android:layout_below="@id/planName" android:layout_marginEnd="8.0dip" android:layout_alignParentEnd="true" />
+                <ImageView android:id="@id/difficultyIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" android:src="@mipmap/training_plan_cardio_icon" android:scaleType="fitCenter" android:layout_below="@id/planName" android:layout_marginEnd="8.0dip" android:layout_toStartOf="@id/volumeIcon" />
+                <ImageView android:id="@id/categoryIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" android:src="@mipmap/training_plan_cardio_icon" android:layout_below="@id/planName" android:layout_marginEnd="8.0dip" android:layout_toStartOf="@id/difficultyIcon" />
+            </RelativeLayout>
+            <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:orientation="vertical" android:background="@color/black" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                        <TextView android:textSize="20.0sp" android:id="@id/planDayHeader" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="DAY X" android:textAllCaps="true" />
+                        <TextView android:textSize="16.0sp" android:textColor="?colorFitHeadline" android:id="@id/dayOverviewText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:background="@color/black" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                        <TextView android:textSize="20.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/training_plan_day_instructions_header" android:textAllCaps="true" />
+                        <TextView android:id="@id/instructionText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:background="@color/black" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip">
+                        <TextView android:textSize="20.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/training_plan_day_workout_header" android:textAllCaps="true" />
+                        <TextView android:textColor="?colorFitPrimary" android:id="@id/workoutText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:id="@id/postWorkoutArea" android:background="@color/black" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="10.0dip">
+                        <TextView android:textSize="20.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/training_plan_day_post_ride_header" android:textAllCaps="true" />
+                        <TextView android:id="@id/postRideText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10.0dip" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0dip" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

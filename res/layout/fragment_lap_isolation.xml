@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView android:orientation="vertical" android:background="?colorFitBg2" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="8.0dip" android:text="power zones" android:textAllCaps="true" />
+        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg1" android:paddingTop="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/prop_power_TSS_short" android:layout_weight="1.0" />
+            <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/intensity_factor_short" android:layout_weight="1.0" />
+            <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/kilojoules_short" android:layout_weight="1.0" />
+            <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/prop_power_normalized_short" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg1" android:paddingTop="4.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip">
+            <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/tssValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+            <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/ifValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+            <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/kjValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+            <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/normalizedValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/powerZonesFrame" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="16.0dip" />
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="8.0dip" android:text="heart zones" android:textAllCaps="true" />
+        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg1" android:paddingTop="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/analysis_heart_avg_max_label" android:layout_weight="1.0" />
+            <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/analysis_heart_avg_reserve_label" android:layout_weight="1.0" />
+            <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/minimum_short" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg1" android:paddingTop="4.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip">
+            <TextView android:textColor="?colorFitHeart" android:gravity="center" android:id="@id/avgHeartMaxValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+            <TextView android:textColor="?colorFitHeart" android:gravity="center" android:id="@id/avgHeartReserveValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+            <TextView android:textColor="?colorFitHeart" android:gravity="center" android:id="@id/minHeartValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/heartZoneFrame" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="16.0dip" />
+        <com.kinetic.fit.ui.widget.SubscriptionCalloutWidget android:id="@id/calloutText" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="8.0dip" android:text="mean maximums" android:textAllCaps="true" />
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:id="@id/mm1" android:background="?colorFitBg1" android:paddingTop="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/analysis_mean_max_5s_mini_label" android:layout_weight="1.0" />
+                <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/analysis_mean_max_20s_mini_label" android:layout_weight="1.0" />
+                <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/analysis_mean_max_1m_mini_label" android:layout_weight="1.0" />
+                <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/analysis_mean_max_5m_mini_label" android:layout_weight="1.0" />
+                <TextView android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/analysis_mean_max_20m_mini_label" android:layout_weight="1.0" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:id="@id/mm2" android:background="?colorFitBg1" android:paddingTop="4.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/mm1">
+                <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/mm5sValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+                <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/mm20sValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+                <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/mm1mValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+                <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/mm5mValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+                <TextView android:textColor="?colorFitPower" android:gravity="center" android:id="@id/mm20mValue" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/empty_string" android:layout_weight="1.0" />
+            </LinearLayout>
+            <TextView android:gravity="center" android:id="@id/subscriptionRequired" android:background="?colorFitBgAlpha" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="smart subscription required" android:layout_alignBottom="@id/mm2" android:layout_alignParentTop="true" android:textAllCaps="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

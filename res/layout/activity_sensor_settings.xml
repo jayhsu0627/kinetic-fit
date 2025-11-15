@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="20.0sp" android:textColor="?colorFitGreen" android:gravity="center" android:id="@id/sensorNameText" android:background="?colorFitBg1" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="4.0dip" android:paddingEnd="4.0dip" />
+    <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip">
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/speedSensorIcon" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="48.0dip" android:scaleType="fitCenter" android:tint="@color/fit_light_gray" app:srcCompat="@mipmap/icon_speed" />
+            <TextView android:textSize="20.0sp" android:textColor="@color/fit_light_gray" android:gravity="center" android:id="@id/speedValueText" android:paddingTop="4.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_string" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/cadenceSensorIcon" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="48.0dip" android:scaleType="fitCenter" android:tint="@color/fit_light_gray" app:srcCompat="@mipmap/icon_cadence" />
+            <TextView android:textSize="20.0sp" android:textColor="@color/fit_light_gray" android:gravity="center" android:id="@id/cadenceValueText" android:paddingTop="4.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_string" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/powerSensorIcon" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="48.0dip" android:scaleType="fitCenter" android:tint="@color/fit_light_gray" app:srcCompat="@mipmap/icon_power" />
+            <TextView android:textSize="20.0sp" android:textColor="@color/fit_light_gray" android:gravity="center" android:id="@id/powerValueText" android:paddingTop="4.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_string" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:layout_gravity="center" android:id="@id/heartRateSensorIcon" android:padding="8.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="48.0dip" android:scaleType="fitCenter" android:tint="@color/fit_light_gray" app:srcCompat="@drawable/material_icon_heart" />
+            <TextView android:textSize="20.0sp" android:textColor="@color/fit_light_gray" android:gravity="center" android:id="@id/heartRateValueText" android:paddingTop="4.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_string" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/calibrateLayout" android:background="?colorFitBg0" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip">
+        <TextView android:textColor="?colorFitHeadline" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="CONTROLLER SETTINGS" />
+        <com.kinetic.fit.ui.widget.FitButton android:textSize="18.0sp" android:id="@id/calibrateButton" android:padding="6.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="4.0dip" android:minHeight="0.0dip" android:text="Calibrate" android:textAllCaps="false" android:layout_marginStart="12.0dip" android:layout_marginEnd="12.0dip"
+          xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/firmwareLayout" android:background="?colorFitBg0" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textColor="?colorFitHeadline" android:padding="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FIRMWARE" android:layout_alignParentStart="true" />
+            <TextView android:id="@id/firmwareVersion" android:padding="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="4.0dip" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <com.kinetic.fit.ui.widget.FitButton android:textSize="18.0sp" android:id="@id/firmwareButton" android:padding="6.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="4.0dip" android:minHeight="0.0dip" android:text="Update Firmware" android:textAllCaps="false" android:layout_marginStart="12.0dip" android:layout_marginEnd="12.0dip" fit:buttonType="disabled"
+          xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+    </LinearLayout>
+    <RelativeLayout android:id="@id/sensor_setting_trailing_layout_space" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <com.kinetic.fit.ui.widget.FitButton android:textSize="18.0sp" android:id="@id/disconnectButton" android:paddingTop="6.0dip" android:paddingBottom="6.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="4.0dip" android:minHeight="0.0dip" android:layout_alignParentBottom="true" android:textAllCaps="false" android:paddingStart="12.0dip" android:paddingEnd="12.0dip" android:layout_marginStart="12.0dip" android:layout_marginEnd="12.0dip" android:layout_alignParentEnd="true" fit:buttonType="destructive"
+          xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+    </RelativeLayout>
+</LinearLayout>

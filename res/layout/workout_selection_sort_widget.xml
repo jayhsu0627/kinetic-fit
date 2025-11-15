@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/workoutSortView" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.kinetic.fit.ui.widget.FitSearchBar android:id="@id/searchBar" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <LinearLayout android:orientation="horizontal" android:background="@drawable/border_b" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <info.hoang8f.android.segmented.SegmentedGroup android:gravity="center" android:orientation="horizontal" android:id="@id/workoutSort" android:padding="8.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" segmentedgroup:sc_border_width="1.0dip" segmentedgroup:sc_checked_text_color="?colorFitBg0" segmentedgroup:sc_corner_radius="2.0dip" segmentedgroup:sc_tint_color="?colorFitPrimary" xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto">
+            <RadioButton android:textSize="13.0sp" android:id="@id/workoutNameSort" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/name_caps" android:layout_weight="1.0" style="@style/RadioButton" />
+            <RadioButton android:textSize="13.0sp" android:id="@id/workoutDurationSort" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/duration" android:layout_weight="1.0" android:textAllCaps="true" style="@style/RadioButton" />
+            <RadioButton android:textSize="13.0sp" android:id="@id/workoutIFSort" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/intensity_factor_short" android:layout_weight="1.0" style="@style/RadioButton" />
+            <RadioButton android:textSize="13.0sp" android:id="@id/workoutTSSSort" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/prop_power_TSS_short" android:layout_weight="1.0" style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    </LinearLayout>
+    <com.kinetic.fit.ui.widget.SubscriptionCalloutWidget android:id="@id/callout" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip" />
+    <android.support.v7.widget.RecyclerView android:id="@id/recyclerView" android:background="?colorFitBg1" android:paddingLeft="4.0dip" android:paddingRight="4.0dip" android:layoutAnimation="@anim/fall_down_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</LinearLayout>

@@ -1,0 +1,33 @@
+# Build outputs
+*.apk
+*.ap_
+*.dex
+*.class
+
+# Android Studio
+*.iml
+.gradle/
+local.properties
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# Rebuilt APKs
+*-rebuilt.apk
+*-aligned.apk
+
+# Keystores (for security)
+*.keystore
+*.jks
+*.p12
+

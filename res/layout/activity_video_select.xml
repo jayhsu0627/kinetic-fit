@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <android.support.v4.view.ViewPager android:id="@id/videoPager" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+            <android.support.v4.view.PagerTitleStrip android:layout_gravity="top" android:id="@id/video_pager_title_strip" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/KineticTheme.PagerTitleStrip" />
+        </android.support.v4.view.ViewPager>
+        <FrameLayout android:background="@drawable/border_t" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <include android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/footer_buttons" />
+        </FrameLayout>
+    </LinearLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0dip" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

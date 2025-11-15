@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.kinetic.fit.ui.widget.FitButton android:id="@id/kBaseSupportButton" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="12.0dip" android:text="Knowledge Base" fit:buttonType="Basic"
+      xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+    <com.kinetic.fit.ui.widget.FitButton android:id="@id/contactSupportButton" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="12.0dip" android:text="Contact Us" fit:buttonType="Basic"
+      xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+    <com.kinetic.fit.ui.widget.FitButton android:id="@id/supportTicketsButton" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="12.0dip" android:text="My Tickets" fit:buttonType="Basic"
+      xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+</LinearLayout>

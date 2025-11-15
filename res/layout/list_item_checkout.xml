@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:background="@drawable/border_t" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/header"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/itemName" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="12-month smart subscription" android:layout_weight="1.0" android:textAllCaps="true" android:layout_marginStart="16.0dip" />
+    <TextView android:layout_gravity="end|bottom|center" android:id="@id/itemCost" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$59.99" android:textAllCaps="true" android:layout_marginStart="64.0dip" android:layout_marginEnd="16.0dip" />
+</LinearLayout>

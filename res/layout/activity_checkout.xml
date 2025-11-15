@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/checkout_parent" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/header" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@mipmap/header_release_the_beast" android:adjustViewBounds="true" android:layout_alignParentStart="true" />
+    <com.kinetic.fit.ui.widget.CheckoutItemView android:id="@id/item1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/header" layout="@layout/list_item_checkout" />
+    <com.kinetic.fit.ui.widget.CheckoutItemView android:id="@id/item2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/item1" layout="@layout/list_item_checkout" />
+    <LinearLayout android:background="@drawable/border_tb" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/item2">
+        <TextView android:textColor="?colorFitPrimary" android:id="@id/totalText" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Pay to Kintetic Fit" android:layout_weight="1.0" android:textAllCaps="true" android:layout_marginStart="16.0dip" />
+        <TextView android:textColor="?colorFitPrimary" android:layout_gravity="end|bottom|center" android:id="@id/totalCost" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="$59.99" android:layout_marginStart="32.0dip" android:layout_marginEnd="16.0dip" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/bottom_layout" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <FrameLayout android:id="@id/wallet_frame" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <include android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/footer_buttons" />
+    </LinearLayout>
+    <FrameLayout android:id="@id/confirm_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/bottom_layout" />
+    <com.kinetic.fit.ui.widget.CreditCardWidget android:id="@id/credit_card_widget" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/bottom_layout" />
+</RelativeLayout>

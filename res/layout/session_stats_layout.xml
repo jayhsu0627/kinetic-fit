@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="horizontal" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="40.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="center" android:tint="?colorFitPrimary" app:srcCompat="@drawable/material_icon_time" />
+        <TextView android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/session_duration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:01" android:layout_marginStart="4.0dip" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="center" android:tint="?colorFitPrimary" app:srcCompat="@drawable/material_icon_calories" />
+        <TextView android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/session_calories" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:01" android:layout_marginStart="4.0dip" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ImageView android:layout_gravity="center" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@mipmap/icon_distance" android:scaleType="fitCenter" android:tint="?colorFitPrimary" />
+        <TextView android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/session_distance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:01" android:layout_marginStart="4.0dip" />
+    </LinearLayout>
+</LinearLayout>

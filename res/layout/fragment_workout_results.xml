@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kinetic.fit.ui.widget.FitLinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="31.0dip" android:gravity="center" android:layout_width="fill_parent" android:layout_height="0.0dip" android:text="Workout Summary" android:layout_weight="1.5" />
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="7.5" />
+    <Button android:id="@id/button_workout_results_done" android:layout_width="fill_parent" android:layout_height="0.0dip" android:text="Done" android:layout_weight="1.0" />
+</com.kinetic.fit.ui.widget.FitLinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <include android:id="@id/footer" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" layout="@layout/footer_buttons" />
+        <TextView android:textSize="18.0sp" android:textColor="?colorFitPrimary" android:gravity="center" android:id="@id/newFtpText" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/footer" />
+        <android.support.design.widget.CoordinatorLayout android:id="@id/main_content" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/newFtpText" xmlns:app="http://schemas.android.com/apk/res-auto">
+            <android.support.design.widget.AppBarLayout android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:id="@id/appBar" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <android.support.design.widget.CollapsingToolbarLayout android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_scrollFlags="exitUntilCollapsed|scroll">
+                    <LinearLayout android:orientation="vertical" android:id="@id/weirdLayout" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_collapseMode="parallax">
+                        <TextView android:textSize="20.0sp" android:textColor="?colorFitHeadline" android:id="@id/workoutName" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:text="flee Ride" android:layout_marginStart="8.0dip" app:layout_scrollFlags="scroll" />
+                        <TextView android:textSize="14.0sp" android:id="@id/workoutDate" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:text="October 11, 2015 at 3:19 PM" android:layout_marginStart="16.0dip" app:layout_scrollFlags="scroll" />
+                        <com.kinetic.fit.ui.widget.FitSessionStatsWidget android:id="@id/scrollingStats" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:paddingTop="1.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip">
+                            <View android:paddingLeft="20.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="3.0" />
+                            <View android:padding="10.0dip" android:layout_width="60.0dip" android:layout_height="fill_parent" />
+                            <TextView android:textSize="14.0sp" android:paddingLeft="10.0dip" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Avg" android:layout_weight="2.0" />
+                            <TextView android:textSize="14.0sp" android:paddingTop="5.0dip" android:paddingRight="20.0dip" android:paddingBottom="5.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Max" android:layout_weight="2.0" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:paddingTop="1.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip">
+                            <TextView android:textSize="16.0sp" android:paddingLeft="20.0dip" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Power" android:layout_weight="3.0" />
+                            <ImageView android:background="@drawable/border_r" android:padding="10.0dip" android:layout_width="60.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_power" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitPower" android:gravity="center_vertical" android:id="@id/powerAvg" android:paddingLeft="10.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- w" android:layout_weight="2.0" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitPower" android:gravity="center_vertical" android:id="@id/powerMax" android:paddingRight="20.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- w" android:layout_weight="2.0" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip">
+                            <TextView android:textSize="16.0sp" android:paddingLeft="20.0dip" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Heart Rate" android:layout_weight="3.0" />
+                            <ImageView android:background="@drawable/border_r" android:padding="10.0dip" android:layout_width="60.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_heart" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitHeart" android:gravity="center_vertical" android:id="@id/heartAvg" android:paddingLeft="10.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- bpm" android:layout_weight="2.0" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitHeart" android:gravity="center_vertical" android:id="@id/heartMax" android:paddingRight="20.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- bpm" android:layout_weight="2.0" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip">
+                            <TextView android:textSize="16.0sp" android:paddingLeft="20.0dip" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Cadence" android:layout_weight="3.0" />
+                            <ImageView android:background="@drawable/border_r" android:padding="10.0dip" android:layout_width="60.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_cadence" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitCadence" android:gravity="center_vertical" android:id="@id/cadenceAvg" android:paddingLeft="10.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- rpm" android:layout_weight="2.0" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitCadence" android:gravity="center_vertical" android:id="@id/cadenceMax" android:paddingRight="20.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- rpm" android:layout_weight="2.0" />
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:paddingBottom="1.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip">
+                            <TextView android:textSize="16.0sp" android:paddingLeft="20.0dip" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Speed" android:layout_weight="3.0" />
+                            <ImageView android:background="@drawable/border_r" android:padding="10.0dip" android:layout_width="60.0dip" android:layout_height="fill_parent" android:src="@mipmap/icon_speed" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitSpeed" android:gravity="center_vertical" android:id="@id/speedAvg" android:paddingLeft="10.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- mph" android:layout_weight="2.0" />
+                            <TextView android:textSize="16.0sp" android:textColor="?colorFitSpeed" android:gravity="center_vertical" android:id="@id/speedMax" android:paddingRight="20.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="--- mph" android:layout_weight="2.0" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <android.support.v7.widget.Toolbar android:padding="0.0dip" android:layout_width="fill_parent" android:layout_height="40.0dip" app:contentInsetLeft="0.0dip" app:contentInsetStart="0.0dip" app:layout_collapseMode="pin">
+                        <com.kinetic.fit.ui.widget.FitSessionStatsWidget android:id="@id/toolbarStats" android:background="?colorFitBg1" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                    </android.support.v7.widget.Toolbar>
+                </android.support.design.widget.CollapsingToolbarLayout>
+                <com.kinetic.fit.ui.widget.FitGraphView android:id="@id/graph" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="75.0sp" app:layout_anchor="@id/appBar" app:layout_anchorGravity="start|bottom|center" />
+                <android.support.design.widget.TabLayout android:id="@id/lapTabs" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="wrap_content" app:tabIndicatorColor="?colorFitPrimary" app:tabSelectedTextColor="?colorFitPrimary" />
+            </android.support.design.widget.AppBarLayout>
+            <android.support.v4.view.ViewPager android:id="@id/lapViewpager" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0dip" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

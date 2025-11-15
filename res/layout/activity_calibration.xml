@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="@drawable/border_tblr" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="32.0dip" android:layout_marginEnd="32.0dip">
+        <TextView android:textSize="24.0sp" android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/instructText" android:background="?colorFitBg0" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Speed up to 21mph" />
+        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="1.0dip" android:layout_marginEnd="1.0dip">
+            <LinearLayout android:gravity="center" android:background="@drawable/border_tb" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <ImageView android:background="@mipmap/icon_speed" android:layout_width="wrap_content" android:layout_height="fill_parent" android:scaleType="centerInside" android:layout_marginStart="16.0dip" android:layout_marginEnd="16.0dip" android:backgroundTint="@color/fit_light_gray" />
+            </LinearLayout>
+            <TextView android:textSize="40.0sp" android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/currentSpeedText" android:background="@drawable/border_tb" android:padding="16.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="00.0" android:layout_weight="1.0" />
+            <TextView android:textSize="20.0sp" android:gravity="center_vertical" android:layout_gravity="start" android:id="@id/unitText" android:background="@drawable/border_tb" android:padding="8.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="MPH" />
+        </LinearLayout>
+        <TextView android:textSize="20.0sp" android:gravity="center" android:id="@id/previousText" android:background="?colorFitBg1" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Current Spindown Time: 10.29" android:paddingStart="16.0dip" android:paddingEnd="16.0dip" android:layout_marginStart="1.0dip" android:layout_marginEnd="1.0dip" />
+        <include android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="1.0dip" android:layout_marginStart="1.0dip" android:layout_marginEnd="1.0dip" layout="@layout/footer_buttons" />
+    </LinearLayout>
+</LinearLayout>

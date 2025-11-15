@@ -1,0 +1,61 @@
+.class public final Lcom/twitter/sdk/android/tweetcomposer/R$drawable;
+.super Ljava/lang/Object;
+.source "R.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lcom/twitter/sdk/android/tweetcomposer/R;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x19
+    name = "drawable"
+.end annotation
+
+
+# static fields
+.field public static final tw__app_info_layout_border:I = 0x7f0801de
+
+.field public static final tw__btn_composer_tweet:I = 0x7f0801e0
+
+.field public static final tw__composer_close:I = 0x7f0801e2
+
+.field public static final tw__composer_logo_blue:I = 0x7f0801e3
+
+.field public static final tw__composer_logo_white:I = 0x7f0801e4
+
+.field public static final tw__ic_logo_default:I = 0x7f080225
+
+.field public static final tw__install_button_border:I = 0x7f080238
+
+.field public static final tw__login_btn:I = 0x7f08023a
+
+.field public static final tw__login_btn_default:I = 0x7f08023b
+
+.field public static final tw__login_btn_default_light:I = 0x7f08023c
+
+.field public static final tw__login_btn_disabled:I = 0x7f08023d
+
+.field public static final tw__login_btn_light:I = 0x7f08023e
+
+.field public static final tw__login_btn_pressed:I = 0x7f08023f
+
+.field public static final tw__login_btn_pressed_light:I = 0x7f080240
+
+.field public static final tw__login_btn_text_color_light:I = 0x7f080241
+
+.field public static final tw__share_email_header:I = 0x7f080246
+
+.field public static final tw__transparent:I = 0x7f080247
+
+
+# direct methods
+.method private constructor <init>()V
+    .locals 0
+
+    .line 73
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method

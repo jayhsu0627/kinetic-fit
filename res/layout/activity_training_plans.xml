@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:background="?colorFitBg2" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:background="@drawable/border_b" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:translationZ="5.0dip" android:elevation="10.0dip">
+                <ImageView android:id="@id/planDifficultyIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10.0dip" />
+                <TextView android:textSize="12.0sp" android:textColor="?colorFitPrimary" android:gravity="center" android:layout_gravity="center" android:id="@id/planDifficultyText" android:background="@drawable/border_tblr_green" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginEnd="15.0dip" />
+                <ImageView android:id="@id/planVolumeIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="15.0dip" android:layout_marginEnd="10.0dip" />
+                <TextView android:textSize="12.0sp" android:textColor="?colorFitPrimary" android:gravity="center" android:layout_gravity="center" android:id="@id/planVolumeText" android:background="@drawable/border_tblr_green" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            </LinearLayout>
+        </LinearLayout>
+        <com.kinetic.fit.ui.widget.FitSearchBar android:id="@id/searchBar" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <com.kinetic.fit.ui.widget.SubscriptionCalloutWidget android:id="@id/subscriptionCallout" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip" />
+        <android.support.v7.widget.RecyclerView android:id="@id/recyclerView" android:layoutAnimation="@anim/fall_down_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0dip" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

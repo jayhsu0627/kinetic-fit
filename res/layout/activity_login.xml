@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:animateLayoutChanges="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginLeft="50.0dip" android:layout_marginRight="50.0dip" android:layout_weight="1.0">
+        <ImageView android:layout_width="fill_parent" android:layout_height="120.0dip" android:src="@mipmap/fit_logo" />
+        <EditText android:textSize="14.0sp" android:id="@id/emailEditText" android:background="@drawable/border_b" android:padding="8.0dip" android:focusableInTouchMode="true" android:nextFocusDown="@id/passwordEditText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:hint="@string/login_email" android:maxLines="1" android:inputType="textEmailAddress" android:onClick="requestFocus" android:textIsSelectable="true" android:textCursorDrawable="@null" />
+        <EditText android:textSize="14.0sp" android:id="@id/passwordEditText" android:background="@drawable/border_b" android:padding="8.0dip" android:nextFocusDown="@id/createAccountNameEditText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:hint="@string/login_password" android:maxLines="1" android:inputType="textPassword" android:textIsSelectable="true" android:textCursorDrawable="@null" />
+        <EditText android:textSize="14.0sp" android:id="@id/createAccountNameEditText" android:background="@drawable/border_b" android:padding="8.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:hint="@string/login_name" android:maxLines="1" android:inputType="textPersonName" android:textIsSelectable="true" android:textCursorDrawable="@null" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:weightSum="1.0">
+            <com.kinetic.fit.ui.widget.FitButton android:id="@id/loginButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/login_log_in" android:imeOptions="actionDone" fit:buttonType="Basic"
+              xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+            <com.kinetic.fit.ui.widget.FitButton android:id="@id/signUpButton" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/login_sign_up" android:imeOptions="actionDone" fit:buttonType="Basic"
+              xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+            <com.kinetic.fit.ui.widget.FitButton android:id="@id/retrievePasswordButton" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Reset Password" android:imeOptions="actionDone" fit:buttonType="Basic"
+              xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="100.0dip" android:paddingStart="16.0dip" android:paddingEnd="16.0dip">
+        <TextView android:textSize="14.0sp" android:textColor="?colorFitBody" android:gravity="center" android:id="@id/forgotPasswordTextLink" android:padding="20.0dip" android:clickable="true" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/login_forgot_password" android:layout_weight="1.0" />
+        <TextView android:textSize="14.0sp" android:textColor="?colorFitBody" android:gravity="center" android:id="@id/loginTextLink" android:padding="20.0dip" android:visibility="gone" android:clickable="true" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/login_log_in" android:layout_weight="1.0" />
+        <TextView android:textSize="14.0sp" android:textColor="?colorFitBody" android:gravity="center" android:id="@id/createAccountTextLink" android:padding="20.0dip" android:clickable="true" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="Sign Up" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

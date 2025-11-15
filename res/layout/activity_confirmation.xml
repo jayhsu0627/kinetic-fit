@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="1.0">
+        <ImageView android:layout_width="0.0dip" android:layout_height="fill_parent" android:tint="?colorFitPrimary" android:layout_weight="0.33" app:srcCompat="@drawable/material_icon_check_mark" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="2.0">
+        <TextView android:textSize="24.0sp" android:textColor="?colorFitPrimary" android:gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/success" />
+        <TextView android:textSize="20.0sp" android:textColor="?colorFitHeadline" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="16.0dip" android:text="@string/confirmation_message_text" />
+    </LinearLayout>
+    <TextView android:textSize="18.0sp" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="16.0dip" android:text="@string/downloading_smart_data" />
+    <include layout="@layout/footer_buttons" />
+</LinearLayout>

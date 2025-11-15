@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include android:id="@id/footer" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_alignParentBottom="true" layout="@layout/footer_buttons" />
+        <LinearLayout android:orientation="vertical" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/footer">
+            <com.kinetic.fit.ui.widget.SubscriptionStatusWidget android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <RelativeLayout android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/trial_text" android:padding="12.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Free 7-day Trial!" android:layout_alignParentTop="true" android:layout_alignParentStart="true" />
+                <LinearLayout android:orientation="horizontal" android:id="@id/subs_button_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0sp" android:layout_below="@id/trial_text">
+                    <LinearLayout android:orientation="vertical" android:id="@id/monthlySubButton" android:background="@drawable/border_tblr_green" android:padding="8.0sp" android:clickable="true" android:layout_width="0.0sp" android:layout_height="wrap_content" android:layout_marginTop="4.0sp" android:layout_marginBottom="8.0sp" android:layout_weight="1.0" android:layout_marginStart="12.0sp" android:layout_marginEnd="6.0sp">
+                        <TextView android:textColor="?colorFitPrimary" android:gravity="center" android:id="@id/monthlyPrice" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="4.0sp" android:text="@string/empty_string" />
+                        <TextView android:textSize="12.0sp" android:textColor="?colorFitPrimary" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0sp" android:text="@string/monthly" />
+                    </LinearLayout>
+                    <LinearLayout android:orientation="vertical" android:id="@id/quarterlySubButton" android:background="@drawable/border_tblr_green" android:padding="8.0sp" android:clickable="true" android:layout_width="0.0sp" android:layout_height="wrap_content" android:layout_marginTop="4.0sp" android:layout_marginBottom="8.0sp" android:layout_weight="1.0" android:layout_marginStart="6.0sp" android:layout_marginEnd="12.0sp">
+                        <TextView android:textColor="?colorFitPrimary" android:gravity="center" android:id="@id/quarterlyPrice" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="4.0sp" android:text="@string/empty_string" />
+                        <TextView android:textSize="12.0sp" android:textColor="?colorFitPrimary" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0sp" android:text="@string/quarterly" />
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/fetchingPrices" android:background="?colorFitBgAlpha" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/subscriptions_fetching_prices" android:layout_alignTop="@id/trial_text" android:layout_alignBottom="@id/subs_button_layout" />
+            </RelativeLayout>
+            <RelativeLayout android:gravity="start|center" android:background="@drawable/border_t" android:layout_width="fill_parent" android:layout_height="0.0sp" android:layout_weight="1.0">
+                <com.kinetic.fit.ui.widget.FitBikerAnimationScene android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0sp" />
+                <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0sp" android:text="@string/training_plan_subscriptions_bullets" android:layout_marginStart="32.0sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0sp" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

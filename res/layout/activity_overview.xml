@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.kinetic.fit.ui.widget.FitLinearLayout android:orientation="vertical" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="fill_parent"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <com.kinetic.fit.ui.widget.WorkoutGraphView android:id="@id/graphView" android:background="@drawable/border_b" android:layout_width="fill_parent" android:layout_height="100.0dip" showProgressLine="false" />
+        <LinearLayout android:orientation="vertical" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="20.0sp" android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/workoutName" android:background="@drawable/border_b" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <EditText android:textSize="20.0sp" android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/nameEdit" android:background="@drawable/border_b" android:padding="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/empty_string" android:singleLine="true" android:inputType="text" android:imeOptions="actionDone" />
+        </LinearLayout>
+        <TextView android:textSize="15.0sp" android:textColor="?colorFitPrimary" android:layout_gravity="start" android:id="@id/workoutCategory" android:background="?colorFitBg1" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <ScrollView android:background="@drawable/border_tb" android:paddingLeft="20.0dip" android:paddingTop="1.0dip" android:paddingRight="20.0dip" android:paddingBottom="1.0dip" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+            <TextView android:textSize="16.0sp" android:textColor="?colorFitBody" android:gravity="start|center|top" android:id="@id/overviewText" android:paddingTop="12.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Workout Overview" />
+        </ScrollView>
+        <TextView android:textSize="15.0sp" android:gravity="center" android:id="@id/videoText" android:background="?colorFitBg1" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="No Video Selected" />
+        <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:baselineAligned="false">
+            <FrameLayout android:background="@drawable/border_t" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:paddingStart="12.0dip">
+                <ImageButton android:layout_gravity="center" android:id="@id/favoriteButton" android:background="@drawable/border_tblr_green" android:padding="6.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:scaleType="centerInside" android:tint="?colorFitPrimary" android:contentDescription="@string/icon" app:srcCompat="@drawable/material_icon_star_outline" />
+            </FrameLayout>
+            <include android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/footer_buttons" />
+        </LinearLayout>
+    </com.kinetic.fit.ui.widget.FitLinearLayout>
+    <include android:layout_gravity="start" android:id="@id/drawer_left" android:layout_width="280.0dip" android:layout_height="fill_parent" layout="@layout/nav_drawer" />
+</android.support.v4.widget.DrawerLayout>

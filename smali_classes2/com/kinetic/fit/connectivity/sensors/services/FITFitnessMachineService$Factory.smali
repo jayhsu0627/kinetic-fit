@@ -1,0 +1,555 @@
+.class public Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService$Factory;
+.super Ljava/lang/Object;
+.source "FITFitnessMachineService.kt"
+
+# interfaces
+.implements Lcom/kinetic/fit/kotlinsensors/IServiceFactory;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x9
+    name = "Factory"
+.end annotation
+
+.annotation runtime Lkotlin/Metadata;
+    bv = {
+        0x1,
+        0x0,
+        0x3
+    }
+    d1 = {
+        "\u00002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0008\u0002\n\u0002\u0010%\n\u0002\u0010\u000e\n\u0002\u0018\u0002\n\u0002\u0008\u0006\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\u0008\u0016\u0018\u00002\u00020\u0001B\u0005\u00a2\u0006\u0002\u0010\u0002J \u0010\u000c\u001a\u00020\r2\u0006\u0010\u000e\u001a\u00020\u000f2\u000e\u0010\u0010\u001a\n\u0012\u0006\u0008\u0001\u0012\u00020\u00120\u0011H\u0016R \u0010\u0003\u001a\u000e\u0012\u0004\u0012\u00020\u0005\u0012\u0004\u0012\u00020\u00060\u0004X\u0096\u0004\u00a2\u0006\u0008\n\u0000\u001a\u0004\u0008\u0007\u0010\u0008R\u0014\u0010\t\u001a\u00020\u0005X\u0096D\u00a2\u0006\u0008\n\u0000\u001a\u0004\u0008\n\u0010\u000b\u00a8\u0006\u0013"
+    }
+    d2 = {
+        "Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService$Factory;",
+        "Lcom/kinetic/fit/kotlinsensors/IServiceFactory;",
+        "()V",
+        "characteristicTypes",
+        "",
+        "",
+        "Lcom/kinetic/fit/kotlinsensors/ICharacteristicFactory;",
+        "getCharacteristicTypes",
+        "()Ljava/util/Map;",
+        "uuid",
+        "getUuid",
+        "()Ljava/lang/String;",
+        "create",
+        "Lcom/kinetic/fit/kotlinsensors/BleService;",
+        "gattService",
+        "Landroid/bluetooth/BluetoothGattService;",
+        "sensor",
+        "Ljava/lang/ref/WeakReference;",
+        "Lcom/kinetic/fit/kotlinsensors/BleSensor;",
+        "app_release"
+    }
+    k = 0x1
+    mv = {
+        0x1,
+        0x1,
+        0xd
+    }
+.end annotation
+
+
+# instance fields
+.field private final characteristicTypes:Ljava/util/Map;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/Map<",
+            "Ljava/lang/String;",
+            "Lcom/kinetic/fit/kotlinsensors/ICharacteristicFactory;",
+            ">;"
+        }
+    .end annotation
+.end field
+
+.field private final uuid:Ljava/lang/String;
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 3
+
+    .line 37
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    const-string v0, "00001826-0000-1000-8000-00805F9B34FB"
+
+    .line 38
+    iput-object v0, p0, Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService$Factory;->uuid:Ljava/lang/String;
+
+    const/16 v0, 0xf
+
+    new-array v0, v0, [Lkotlin/Pair;
+
+    .line 44
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$Feature$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x0
+
+    aput-object v1, v0, v2
+
+    .line 45
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$ControlPoint$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x1
+
+    aput-object v1, v0, v2
+
+    .line 46
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$MachineStatus$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x2
+
+    aput-object v1, v0, v2
+
+    .line 47
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TreadmillData$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x3
+
+    aput-object v1, v0, v2
+
+    .line 48
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$CrossTrainerData$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x4
+
+    aput-object v1, v0, v2
+
+    .line 49
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StepClimberData$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x5
+
+    aput-object v1, v0, v2
+
+    .line 50
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$StairClimberData$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x6
+
+    aput-object v1, v0, v2
+
+    .line 51
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$RowerData$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/4 v2, 0x7
+
+    aput-object v1, v0, v2
+
+    .line 52
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$IndoorBikeData$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/16 v2, 0x8
+
+    aput-object v1, v0, v2
+
+    .line 53
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$TrainingStatus$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/16 v2, 0x9
+
+    aput-object v1, v0, v2
+
+    .line 54
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedSpeedRange$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/16 v2, 0xa
+
+    aput-object v1, v0, v2
+
+    .line 55
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedInclinationRange$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/16 v2, 0xb
+
+    aput-object v1, v0, v2
+
+    .line 56
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedResistanceLevelRange$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/16 v2, 0xc
+
+    aput-object v1, v0, v2
+
+    .line 57
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedPowerRange$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/16 v2, 0xd
+
+    aput-object v1, v0, v2
+
+    .line 58
+    sget-object v1, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange$Companion;
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange$Factory;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange$Factory;->getUuid()Ljava/lang/String;
+
+    move-result-object v1
+
+    sget-object v2, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange;->Companion:Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange$Companion;
+
+    invoke-virtual {v2}, Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange$Companion;->factory()Lcom/kinetic/fit/kotlinsensors/services/FitnessMachineService$SupportedHeartRateRange$Factory;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Lkotlin/TuplesKt;->to(Ljava/lang/Object;Ljava/lang/Object;)Lkotlin/Pair;
+
+    move-result-object v1
+
+    const/16 v2, 0xe
+
+    aput-object v1, v0, v2
+
+    .line 43
+    invoke-static {v0}, Lkotlin/collections/MapsKt;->mutableMapOf([Lkotlin/Pair;)Ljava/util/Map;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService$Factory;->characteristicTypes:Ljava/util/Map;
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public create(Landroid/bluetooth/BluetoothGattService;Ljava/lang/ref/WeakReference;)Lcom/kinetic/fit/kotlinsensors/BleService;
+    .locals 2
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Landroid/bluetooth/BluetoothGattService;",
+            "Ljava/lang/ref/WeakReference<",
+            "+",
+            "Lcom/kinetic/fit/kotlinsensors/BleSensor;",
+            ">;)",
+            "Lcom/kinetic/fit/kotlinsensors/BleService;"
+        }
+    .end annotation
+
+    const-string v0, "gattService"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v0, "sensor"
+
+    invoke-static {p2, v0}, Lkotlin/jvm/internal/Intrinsics;->checkParameterIsNotNull(Ljava/lang/Object;Ljava/lang/String;)V
+
+    .line 40
+    new-instance v0, Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService;
+
+    new-instance v1, Ljava/lang/ref/WeakReference;
+
+    invoke-virtual {p2}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
+
+    move-result-object p2
+
+    if-eqz p2, :cond_0
+
+    check-cast p2, Lcom/kinetic/fit/connectivity/sensors/FITSensor;
+
+    invoke-direct {v1, p2}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+
+    invoke-direct {v0, p1, v1}, Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService;-><init>(Landroid/bluetooth/BluetoothGattService;Ljava/lang/ref/WeakReference;)V
+
+    check-cast v0, Lcom/kinetic/fit/kotlinsensors/BleService;
+
+    return-object v0
+
+    :cond_0
+    new-instance p1, Lkotlin/TypeCastException;
+
+    const-string p2, "null cannot be cast to non-null type com.kinetic.fit.connectivity.sensors.FITSensor"
+
+    invoke-direct {p1, p2}, Lkotlin/TypeCastException;-><init>(Ljava/lang/String;)V
+
+    throw p1
+.end method
+
+.method public getCharacteristicTypes()Ljava/util/Map;
+    .locals 1
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()",
+            "Ljava/util/Map<",
+            "Ljava/lang/String;",
+            "Lcom/kinetic/fit/kotlinsensors/ICharacteristicFactory;",
+            ">;"
+        }
+    .end annotation
+
+    .line 43
+    iget-object v0, p0, Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService$Factory;->characteristicTypes:Ljava/util/Map;
+
+    return-object v0
+.end method
+
+.method public getUuid()Ljava/lang/String;
+    .locals 1
+
+    .line 38
+    iget-object v0, p0, Lcom/kinetic/fit/connectivity/sensors/services/FITFitnessMachineService$Factory;->uuid:Ljava/lang/String;
+
+    return-object v0
+.end method

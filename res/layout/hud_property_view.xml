@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="4.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="center" android:id="@id/hud_property_image" android:layout_width="wrap_content" android:layout_height="28.0dip" android:src="@mipmap/icon_power" android:scaleType="centerInside" />
+        <TextView android:textSize="24.0sp" android:textColor="?colorFitHeadline" android:id="@id/hud_property_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="---" android:layout_marginStart="12.0dip" />
+    </LinearLayout>
+    <TextView android:textSize="16.0sp" android:gravity="center" android:id="@id/hud_property_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="power" />
+</LinearLayout>

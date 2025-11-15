@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="28" android:compileSdkVersionCodename="9" package="com.kinetic.fit" platformBuildVersionCode="28" platformBuildVersionName="9">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <permission android:name="com.kinetic.fit.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.kinetic.fit.permission.C2D_MESSAGE"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <supports-screens android:requiresSmallestWidthDp="320" android:smallScreens="false"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <application android:allowBackup="true" android:appComponentFactory="android.support.v4.app.CoreComponentFactory" android:configChanges="orientation|screenSize" android:fullBackupContent="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:name="com.kinetic.fit.FitApplication_" android:theme="@style/KineticTheme">
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.google.android.gms.wallet.api.enabled" android:value="true"/>
+        <service android:name="com.kinetic.fit.data.DataSync_" android:stopWithTask="true"/>
+        <service android:name="com.kinetic.fit.controllers.SessionController_" android:stopWithTask="true"/>
+        <service android:name="com.kinetic.fit.controllers.FitSubscriptionService" android:stopWithTask="true"/>
+        <service android:exported="false" android:name="com.kinetic.fit.cast.FitCastService_"/>
+        <service android:name="fit.kinetic.kotlinsensors.SensorManager" android:stopWithTask="true"/>
+        <service android:name="com.kinetic.fit.connectivity.FitDevicesService" android:stopWithTask="true"/>
+        <service android:name="com.kinetic.fit.kotlinsensors.DfuService" android:stopWithTask="true"/>
+        <provider android:authorities="com.kinetic.fit.ui.analysis.AnalysisActivity" android:exported="false" android:grantUriPermissions="true" android:name="com.kinetic.fit.util.GenericFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:label="@string/app_name" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.login.LoginDispathActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name="com.kinetic.fit.ui.root.SynchronizeActivity" android:noHistory="true" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.root.RootActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_workout" android:name="com.kinetic.fit.ui.workout.WorkoutActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_analysis" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.analysis.AnalysisActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.kinetic.fit.ui.support.SupportActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_profile" android:name="com.kinetic.fit.ui.settings.profile.ProfileActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateUnchanged"/>
+        <activity android:label="@string/title_activity_sensors" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.settings.sensors.SensorsActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleInstance" android:name="com.kinetic.fit.connectivity.third_party_clients.OAuthRedirectHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="com.kinetic.fit"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/title_activity_profile_fragment_social_authenticate_strava" android:launchMode="singleTop" android:name="com.kinetic.fit.connectivity.third_party_clients.StravaAuthActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_profile_fragment_social_authenticate_google" android:launchMode="singleTop" android:name="com.kinetic.fit.connectivity.third_party_clients.GoogleAuthActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_profile_fragment_social_authenticate_ua" android:launchMode="singleTop" android:name="com.kinetic.fit.connectivity.third_party_clients.UAAuthActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_profile_fragment_social_authenticate_trainingpeaks" android:launchMode="singleTop" android:name="com.kinetic.fit.connectivity.third_party_clients.TrainingPeaksAuthActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_profile_fragment_social_authenticate_2peak" android:launchMode="singleTop" android:name="com.kinetic.fit.connectivity.third_party_clients.TwoPeakAuthActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.video.select.VideoSelectActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Workout Overview" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.workout.OverviewActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.kinetic.fit.ui.subscriptions.FitActivateTrialActivity" android:theme="@style/Theme.Transparent"/>
+        <activity android:label="@string/app_name" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.settings.SettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Sensor Update" android:launchMode="singleInstance" android:name="com.kinetic.fit.ui.settings.sensors.SensorUpdateActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Categories" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.workout.CategoryActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Select Workout" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.workout.SelectionActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/title_activity_sensors" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.workout.CalibrateActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Settings" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.settings.sensors.SensorSettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Warmup" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.workout.WarmupActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Connections" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.settings.profile.SocialActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Today's Workout" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.trainingplans.TrainingPlanDayActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Training Plans" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.trainingplans.TrainingPlanActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Plan Schedule" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.trainingplans.TrainingPlanCalendarActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Training Plan Overview" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.trainingplans.TrainingPlanOverViewActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Subscription Status" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.subscriptions.SubscriptionStatusActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Order Confirmed" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.subscriptions.ConfirmationActivty" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboard|orientation" android:launchMode="singleTask" android:name="com.dropbox.core.android.AuthActivity">
+            <intent-filter>
+                <data android:scheme="db-nyrnurbq98qpjgs"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:launchMode="singleInstance" android:name="com.kinetic.fit.connectivity.third_party_clients.DropboxAuthActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTop" android:name="com.kinetic.fit.ui.displays.PropertySelectActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTop" android:name="com.kinetic.fit.ui.displays.DisplaysActivity" android:screenOrientation="portrait"/>
+        <activity android:label="Import Custom Workout" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.root.ImportWorkoutActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="*" android:mimeType="text/plain" android:pathPattern=".*\\.mrc" android:scheme="content"/>
+                <data android:host="*" android:mimeType="text/plain" android:pathPattern=".*\\.erg" android:scheme="content"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="Kinetic" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.login.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.kinetic.fit.ui.settings.sensors.NotificationActivity"/>
+        <activity android:name="com.kinetic.fit.ui.settings.sensors.OldSensorUpdateActivity"/>
+        <meta-data android:name="io.fabric.ApiKey" android:value="e19527497e32ed3a2b59c5bdff6fb71d270d5e19"/>
+        <provider android:authorities="com.kinetic.fit.lifecycle-trojan" android:exported="false" android:multiprocess="true" android:name="android.arch.lifecycle.ProcessLifecycleOwnerInitializer"/>
+        <activity android:name="com.android.billingclient.util.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <provider android:authorities="com.kinetic.fit.crashlyticsinitprovider" android:exported="false" android:initOrder="100" android:name="com.crashlytics.android.CrashlyticsInitProvider"/>
+        <activity android:name="zendesk.support.request.RequestActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="orientation|screenSize" android:label="@string/zs_view_article_loading_title" android:name="zendesk.support.guide.ViewArticleActivity"/>
+        <activity android:label="@string/support_activity_title" android:name="zendesk.support.guide.HelpCenterActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/request_list_activity_title" android:name="zendesk.support.requestlist.RequestListActivity"/>
+        <receiver android:exported="false" android:name="zendesk.support.DeepLinkingBroadcastReceiver">
+            <intent-filter>
+                <action android:name="zendesk.support"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.twitter.sdk.android.tweetui.PlayerActivity" android:theme="@style/MediaTheme"/>
+        <activity android:name="com.twitter.sdk.android.tweetui.GalleryActivity" android:theme="@style/MediaTheme"/>
+        <activity android:configChanges="orientation|screenSize" android:excludeFromRecents="true" android:exported="false" android:name="com.twitter.sdk.android.core.identity.OAuthActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:excludeFromRecents="true" android:exported="false" android:icon="@drawable/tw__transparent" android:label="@string/kit_name" android:name="com.twitter.sdk.android.core.identity.ShareEmailActivity"/>
+        <activity android:exported="false" android:name="com.twitter.sdk.android.tweetcomposer.ComposerActivity" android:windowSoftInputMode="adjustResize|stateVisible"/>
+        <service android:enabled="true" android:exported="false" android:name="com.twitter.sdk.android.tweetcomposer.TweetUploadService"/>
+        <provider android:authorities="com.kinetic.fit.belvedere2.attachments" android:exported="false" android:grantUriPermissions="true" android:name="zendesk.belvedere.BelvedereFileProvider" android:readPermission="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/belvedere_attachment_storage_v2"/>
+        </provider>
+    </application>
+</manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:padding="0.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.lb.auto_fit_textview.AutoResizeTextView android:textSize="28.0dip" android:textStyle="bold" android:gravity="center" android:id="@id/cast_dialog_popup_text" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="0.0dip" android:text="Test" android:layout_weight="1.0" />
+    <LinearLayout android:orientation="horizontal" android:background="?colorFitBg1" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <com.lb.auto_fit_textview.AutoResizeTextView android:textSize="24.0dip" android:textColor="?colorFitPrimary" android:gravity="center" android:id="@id/cast_dialog_popup_duration_text" android:background="@drawable/border_t" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="02:00" android:layout_weight="1.0" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <com.kinetic.fit.ui.hud.HUDPropertyViewMini android:id="@id/cast_dialog_power_view" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <com.kinetic.fit.ui.hud.HUDPropertyViewMini android:id="@id/cast_dialog_laps_view" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <com.lb.auto_fit_textview.AutoResizeTextView android:textSize="24.0dip" android:textColor="?colorFitPower" android:gravity="center" android:id="@id/cast_dialog_popup_power_text" android:background="@drawable/border_t" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="200 watts" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

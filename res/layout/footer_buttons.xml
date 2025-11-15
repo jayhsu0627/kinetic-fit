@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:background="@drawable/border_t" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingEnd="12.0dip">
+        <com.kinetic.fit.ui.widget.FitButton android:textSize="18.0sp" android:id="@id/buttonLeft" android:padding="8.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:minHeight="0.0dip" android:layout_weight="1.0" android:textAllCaps="false" android:layout_marginStart="12.0dip"
+          xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+        <com.kinetic.fit.ui.widget.FitButton android:textSize="18.0sp" android:id="@id/buttonMiddle" android:padding="8.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:minHeight="0.0dip" android:layout_weight="1.0" android:textAllCaps="false" android:layout_marginStart="12.0dip"
+          xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+        <com.kinetic.fit.ui.widget.FitButton android:textSize="18.0sp" android:id="@id/buttonRight" android:padding="8.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:minHeight="0.0dip" android:layout_weight="1.0" android:textAllCaps="false" android:layout_marginStart="12.0dip"
+          xmlns:fit="http://schemas.android.com/apk/res/com.kinetic.fit" />
+    </LinearLayout>
+</FrameLayout>

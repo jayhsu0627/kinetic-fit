@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/border_tb" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/imageView" android:layout_width="75.0dip" android:layout_height="fill_parent" android:src="@mipmap/fit_logo" android:scaleType="fitCenter" android:adjustViewBounds="true" />
+    <RelativeLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="8.0dip" android:layout_marginEnd="8.0dip">
+        <TextView android:textColor="?colorFitHeadline" android:id="@id/status" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip" android:text="Subscription Status: CORE" />
+        <TextView android:textSize="14.0sp" android:id="@id/text2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:text="You're currently missing out on training plans, workouts, videos and more." android:layout_below="@id/status" android:layout_marginStart="8.0dip" />
+    </RelativeLayout>
+</LinearLayout>

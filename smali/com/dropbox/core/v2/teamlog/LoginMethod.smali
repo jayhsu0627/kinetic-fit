@@ -1,0 +1,150 @@
+.class public final enum Lcom/dropbox/core/v2/teamlog/LoginMethod;
+.super Ljava/lang/Enum;
+.source "LoginMethod.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Lcom/dropbox/core/v2/teamlog/LoginMethod$Serializer;
+    }
+.end annotation
+
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Ljava/lang/Enum<",
+        "Lcom/dropbox/core/v2/teamlog/LoginMethod;",
+        ">;"
+    }
+.end annotation
+
+
+# static fields
+.field private static final synthetic $VALUES:[Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+.field public static final enum OTHER:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+.field public static final enum PASSWORD:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+.field public static final enum SAML:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+.field public static final enum TWO_FACTOR_AUTHENTICATION:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 6
+
+    .line 21
+    new-instance v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    const/4 v1, 0x0
+
+    const-string v2, "PASSWORD"
+
+    invoke-direct {v0, v2, v1}, Lcom/dropbox/core/v2/teamlog/LoginMethod;-><init>(Ljava/lang/String;I)V
+
+    sput-object v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;->PASSWORD:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    .line 22
+    new-instance v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    const/4 v2, 0x1
+
+    const-string v3, "TWO_FACTOR_AUTHENTICATION"
+
+    invoke-direct {v0, v3, v2}, Lcom/dropbox/core/v2/teamlog/LoginMethod;-><init>(Ljava/lang/String;I)V
+
+    sput-object v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;->TWO_FACTOR_AUTHENTICATION:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    .line 23
+    new-instance v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    const/4 v3, 0x2
+
+    const-string v4, "SAML"
+
+    invoke-direct {v0, v4, v3}, Lcom/dropbox/core/v2/teamlog/LoginMethod;-><init>(Ljava/lang/String;I)V
+
+    sput-object v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;->SAML:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    .line 31
+    new-instance v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    const/4 v4, 0x3
+
+    const-string v5, "OTHER"
+
+    invoke-direct {v0, v5, v4}, Lcom/dropbox/core/v2/teamlog/LoginMethod;-><init>(Ljava/lang/String;I)V
+
+    sput-object v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;->OTHER:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    const/4 v0, 0x4
+
+    new-array v0, v0, [Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    .line 19
+    sget-object v5, Lcom/dropbox/core/v2/teamlog/LoginMethod;->PASSWORD:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    aput-object v5, v0, v1
+
+    sget-object v1, Lcom/dropbox/core/v2/teamlog/LoginMethod;->TWO_FACTOR_AUTHENTICATION:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    aput-object v1, v0, v2
+
+    sget-object v1, Lcom/dropbox/core/v2/teamlog/LoginMethod;->SAML:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    aput-object v1, v0, v3
+
+    sget-object v1, Lcom/dropbox/core/v2/teamlog/LoginMethod;->OTHER:Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    aput-object v1, v0, v4
+
+    sput-object v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;->$VALUES:[Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    return-void
+.end method
+
+.method private constructor <init>(Ljava/lang/String;I)V
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()V"
+        }
+    .end annotation
+
+    .line 19
+    invoke-direct {p0, p1, p2}, Ljava/lang/Enum;-><init>(Ljava/lang/String;I)V
+
+    return-void
+.end method
+
+.method public static valueOf(Ljava/lang/String;)Lcom/dropbox/core/v2/teamlog/LoginMethod;
+    .locals 1
+
+    .line 19
+    const-class v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    return-object p0
+.end method
+
+.method public static values()[Lcom/dropbox/core/v2/teamlog/LoginMethod;
+    .locals 1
+
+    .line 19
+    sget-object v0, Lcom/dropbox/core/v2/teamlog/LoginMethod;->$VALUES:[Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    invoke-virtual {v0}, [Lcom/dropbox/core/v2/teamlog/LoginMethod;->clone()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, [Lcom/dropbox/core/v2/teamlog/LoginMethod;
+
+    return-object v0
+.end method

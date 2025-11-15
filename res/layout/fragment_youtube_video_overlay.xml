@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/overlay_parent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:animateLayoutChanges="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar android:id="@id/progressBarYouTube" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="2.0dip" android:progressTint="?colorFitBody" style="@android:style/Widget.ProgressBar.Horizontal" />
+    <RelativeLayout android:layout_gravity="center" android:background="?colorFitBg2" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <fragment android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment" android:id="@id/youtubeFrag" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_alignParentTop="true" android:layout_alignParentStart="true" />
+    </RelativeLayout>
+    <ProgressBar android:id="@id/progressBarInterval" android:layout_width="fill_parent" android:layout_height="2.0dip" android:progressTint="?colorFitPrimary" style="@android:style/Widget.ProgressBar.Horizontal" />
+    <LinearLayout android:orientation="horizontal" android:background="?colorFitBg0" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/leftHud" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="2.0">
+            <com.kinetic.fit.ui.hud.HUDPropertyViewMini android:id="@id/powerView" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <com.kinetic.fit.ui.hud.HUDPropertyViewMini android:id="@id/heartRateView" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageButton android:id="@id/pausePlayButton" android:background="?colorFitBg0" android:layout_width="0.0dip" android:layout_height="fill_parent" android:src="@mipmap/button_video_workout_pause" android:scaleType="centerInside" android:layout_weight="1.0" android:contentDescription="Pause Video" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/rightHud" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="2.0">
+            <com.kinetic.fit.ui.hud.HUDPropertyViewMini android:id="@id/speedView" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <com.kinetic.fit.ui.hud.HUDPropertyViewMini android:id="@id/cadenceView" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

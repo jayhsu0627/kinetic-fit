@@ -1,0 +1,163 @@
+.class public Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;
+.super Ljava/lang/Object;
+.source "RoundedCornerTransformation.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x9
+    name = "Builder"
+.end annotation
+
+
+# instance fields
+.field bottomLeftRadius:I
+
+.field bottomRightRadius:I
+
+.field topLeftRadius:I
+
+.field topRightRadius:I
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 0
+
+    .line 69
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method build()Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation;
+    .locals 7
+
+    .line 95
+    iget v0, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->topLeftRadius:I
+
+    if-ltz v0, :cond_0
+
+    iget v1, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->topRightRadius:I
+
+    if-ltz v1, :cond_0
+
+    iget v2, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->bottomRightRadius:I
+
+    if-ltz v2, :cond_0
+
+    iget v3, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->bottomLeftRadius:I
+
+    if-ltz v3, :cond_0
+
+    const/16 v4, 0x8
+
+    new-array v4, v4, [F
+
+    const/4 v5, 0x0
+
+    int-to-float v6, v0
+
+    aput v6, v4, v5
+
+    const/4 v5, 0x1
+
+    int-to-float v0, v0
+
+    aput v0, v4, v5
+
+    const/4 v0, 0x2
+
+    int-to-float v5, v1
+
+    aput v5, v4, v0
+
+    const/4 v0, 0x3
+
+    int-to-float v1, v1
+
+    aput v1, v4, v0
+
+    const/4 v0, 0x4
+
+    int-to-float v1, v2
+
+    aput v1, v4, v0
+
+    const/4 v0, 0x5
+
+    int-to-float v1, v2
+
+    aput v1, v4, v0
+
+    const/4 v0, 0x6
+
+    int-to-float v1, v3
+
+    aput v1, v4, v0
+
+    const/4 v0, 0x7
+
+    int-to-float v1, v3
+
+    aput v1, v4, v0
+
+    .line 105
+    new-instance v0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation;
+
+    invoke-direct {v0, v4}, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation;-><init>([F)V
+
+    return-object v0
+
+    .line 97
+    :cond_0
+    new-instance v0, Ljava/lang/IllegalStateException;
+
+    const-string v1, "Radius must not be negative"
+
+    invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+
+    throw v0
+.end method
+
+.method public setRadii(IIII)Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;
+    .locals 0
+
+    .line 86
+    iput p1, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->topLeftRadius:I
+
+    .line 87
+    iput p2, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->topRightRadius:I
+
+    .line 88
+    iput p3, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->bottomRightRadius:I
+
+    .line 89
+    iput p4, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->bottomLeftRadius:I
+
+    return-object p0
+.end method
+
+.method public setRadius(I)Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;
+    .locals 0
+
+    .line 76
+    iput p1, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->topLeftRadius:I
+
+    .line 77
+    iput p1, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->topRightRadius:I
+
+    .line 78
+    iput p1, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->bottomRightRadius:I
+
+    .line 79
+    iput p1, p0, Lcom/twitter/sdk/android/tweetcomposer/RoundedCornerTransformation$Builder;->bottomLeftRadius:I
+
+    return-object p0
+.end method

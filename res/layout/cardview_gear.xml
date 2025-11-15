@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/gear_layout" android:background="?colorFitBg0" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/gear_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="16.0dip" android:scaleType="fitCenter" />
+    <TextView android:textSize="18.0sp" android:textColor="?colorFitHeadline" android:gravity="center" android:id="@id/gear_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Kinetic inRide Pod" android:layout_below="@id/gear_image" />
+    <TextView android:textColor="?colorFitDestructive" android:id="@id/gear_retail_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="8.0dip" android:layout_below="@id/gear_name" android:layout_alignParentEnd="true" />
+    <TextView android:textColor="?colorFitHeadline" android:id="@id/gear_promo_price" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="8.0dip" android:text="$10.00" android:layout_toLeftOf="@id/gear_retail_price" android:layout_below="@id/gear_name" />
+</RelativeLayout>
