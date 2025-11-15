@@ -60,6 +60,54 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.
 zipalign -v 4 kinetic-fit-rebuilt.apk kinetic-fit-aligned.apk
 ```
 
+## 🔓 Login Bypass Modifications
+
+This repository includes modifications to bypass the login requirement, as the original company has defunct and authentication servers are no longer available. These changes allow the app to function without requiring server-side authentication.
+
+### Modifications Made
+
+#### 1. Login Dispatch Activity (`smali_classes2/com/kinetic/fit/ui/login/LoginDispathActivity.smali`)
+- **Modified `runDispatch()` method**: Now bypasses both login and synchronization screens
+- **Added `getRootIntent()` method**: Creates intent to directly launch RootActivity
+- **Result**: App launches directly to the main interface, skipping authentication
+
+#### 2. Profile Class (`smali_classes2/com/kinetic/fit/data/realm_objects/Profile.smali`)
+- **Modified `current()` method**: Automatically creates a mock "admin" user profile if none exists in the Realm database
+  - Creates profile with username: "admin"
+  - Email: "admin@kinetic.fit"
+  - Session token: "admin-token"
+- **Modified `getCurrentName()` method**: Returns "admin" as default when no profile exists
+- **Modified `getMainEmail()` method**: Returns "admin@kinetic.fit" as default when no profile exists
+
+### How It Works
+
+1. On app launch, `LoginDispathActivity` is the entry point
+2. Instead of checking for authentication and routing to login or sync screens, it now directly navigates to `RootActivity`
+3. When the app queries for user profile information:
+   - If no profile exists in the Realm database, an admin profile is automatically created
+   - Profile getter methods return admin values as fallbacks
+4. User profile synchronization is bypassed entirely
+
+### Admin User Profile
+
+The bypass creates a pseudo-user profile with the following details:
+- **Name**: admin
+- **Email**: admin@kinetic.fit
+- **Username**: admin@kinetic.fit
+- **Object ID**: admin
+- **Session Token**: admin-token
+
+### Important Notes
+
+- ⚠️ These modifications are **for educational/research purposes only**
+- ⚠️ The modifications allow offline use of the app since authentication servers are unavailable
+- ⚠️ User profile synchronization functionality has been disabled
+- ⚠️ Some features that require server-side authentication may not work
+
+### Rebuilding with Bypass
+
+The modifications are already in the smali files. Simply rebuild the APK as described in the "Rebuilding the APK" section above.
+
 ## 📋 Features
 
 Based on the manifest and code structure, this application includes:

@@ -1054,7 +1054,7 @@
 .end method
 
 .method public static current()Lcom/kinetic/fit/data/realm_objects/Profile;
-    .locals 3
+    .locals 4
 
     .line 238
     invoke-static {}, Lio/realm/Realm;->getDefaultInstance()Lio/realm/Realm;
@@ -1079,12 +1079,28 @@
 
     if-eqz v2, :cond_0
 
+    # Create a mock admin profile and save it to Realm
+    invoke-virtual {v0}, Lio/realm/Realm;->beginTransaction()V
+    
+    const-class v1, Lcom/kinetic/fit/data/realm_objects/Profile;
+    const-string v2, "admin"
+    invoke-virtual {v0, v1, v2}, Lio/realm/Realm;->createObject(Ljava/lang/Class;Ljava/lang/Object;)Lio/realm/RealmModel;
+    move-result-object v1
+    check-cast v1, Lcom/kinetic/fit/data/realm_objects/Profile;
+    
+    invoke-virtual {v1, v2}, Lcom/kinetic/fit/data/realm_objects/Profile;->setName(Ljava/lang/String;)V
+    const-string v3, "admin@kinetic.fit"
+    invoke-virtual {v1, v3}, Lcom/kinetic/fit/data/realm_objects/Profile;->setEmail(Ljava/lang/String;)V
+    invoke-virtual {v1, v3}, Lcom/kinetic/fit/data/realm_objects/Profile;->setUsername(Ljava/lang/String;)V
+    const-string v2, "admin-token"
+    invoke-virtual {v1, v2}, Lcom/kinetic/fit/data/realm_objects/Profile;->setSessionToken(Ljava/lang/String;)V
+    
+    invoke-virtual {v0}, Lio/realm/Realm;->commitTransaction()V
+
     .line 241
     invoke-virtual {v0}, Lio/realm/Realm;->close()V
 
-    const/4 v0, 0x0
-
-    return-object v0
+    return-object v1
 
     :cond_0
     const/4 v2, 0x0
@@ -1131,7 +1147,8 @@
     .line 330
     invoke-virtual {v0}, Lio/realm/Realm;->close()V
 
-    const/4 v0, 0x0
+    # Return admin as default name
+    const-string v0, "admin"
 
     return-object v0
 
@@ -1417,7 +1434,8 @@
     .line 291
     invoke-virtual {v0}, Lio/realm/Realm;->close()V
 
-    const/4 v0, 0x0
+    # Return admin email as default
+    const-string v0, "admin@kinetic.fit"
 
     return-object v0
 
