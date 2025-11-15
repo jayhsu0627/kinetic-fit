@@ -238,6 +238,56 @@ The application uses several libraries including:
 - **Crashlytics** for crash reporting
 - **Zendesk** for customer support
 
+## 🔬 Spindown Calibration Analysis
+
+The repository includes an analysis of the spindown calibration algorithm used by Kinetic trainers. This calibration determines rolling resistance and adjusts the power curve accordingly.
+
+### Power Calculation Formula
+
+The power calculation consists of:
+
+1. **Base Power**: `P_base = 5.24482 × v_mph + 0.019168 × v_mph³`
+   - Where `v_mph = speed_kph × 0.621371`
+
+2. **Spindown Calibration Correction**:
+   - **Regular Flywheel** (spindown 1.5-6.5s): `correction = 4.55 × spindown_ms × P_base × 10⁻⁵ + (-0.1425) × spindown_ms + 236.2`
+   - **ProFlywheel** (spindown 4.7-6.5s): `correction = 2.62 × spindown_ms × P_base × 10⁻⁵ + (-0.021) × spindown_ms + 104.97`
+
+3. **Final Power**: `P_final = P_base + correction`
+
+### Files
+
+- **Analysis Document**: `CALIBRATION_ANALYSIS.md` - Detailed explanation of the calibration algorithm
+- **Visualization Script**: `power_curve_visualizer.py` - Python script to visualize power curves
+- **Visualization Output**: `power_curve_visualization.png` - Generated power curve graphs
+
+### Running the Visualization
+
+```bash
+# Install dependencies (if needed)
+pip3 install matplotlib numpy
+
+# Run the visualization
+python3 power_curve_visualizer.py
+```
+
+This will generate power curves showing how spindown calibration affects power readings at different speeds.
+
+**Source Code**: The calibration logic is found in `smali_classes2/com/kinetic/sdk/inride/b.smali` (lines 912-1016)
+
+### FAQ
+
+For answers to common questions about spindown calibration, see:
+- **`CALIBRATION_FAQ.md`** - Detailed FAQ covering:
+  - How spindown is measured (device vs. app)
+  - Why calibration might end early (wheel still rotating)
+  - Whether spindown time can be manually adjusted
+- **`SPINDOWN_TROUBLESHOOTING.md`** - Troubleshooting guide for:
+  - Adjusting spindown time (too fast/too slow)
+  - Tire pressure and roller tension adjustments
+  - Power meter comparison issues
+  - Flywheel type identification
+
 ## 🤝 Contributing
 
 This is a decompiled project. Contributions that improve documentation, analysis, or educational value are welcome. However, please ensure any contributions comply with legal and ethical guidelines.
