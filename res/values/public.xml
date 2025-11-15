@@ -1384,12 +1384,12 @@
     <public type="dimen" name="zs_request_toolbar_progress_bar_height" id="0x7f0701b4" />
     <public type="dimen" name="zs_request_toolbar_shadow_space" id="0x7f0701b5" />
     <public type="dimen" name="zs_request_user_message_bottom_padding" id="0x7f0701b6" />
-    <public type="drawable" name="$avd_hide_password__0" id="0x7f080000" />
-    <public type="drawable" name="$avd_hide_password__1" id="0x7f080001" />
-    <public type="drawable" name="$avd_hide_password__2" id="0x7f080002" />
-    <public type="drawable" name="$avd_show_password__0" id="0x7f080003" />
-    <public type="drawable" name="$avd_show_password__1" id="0x7f080004" />
-    <public type="drawable" name="$avd_show_password__2" id="0x7f080005" />
+    <public type="drawable" name="avd_hide_password__0" id="0x7f080000" />
+    <public type="drawable" name="avd_hide_password__1" id="0x7f080001" />
+    <public type="drawable" name="avd_hide_password__2" id="0x7f080002" />
+    <public type="drawable" name="avd_show_password__0" id="0x7f080003" />
+    <public type="drawable" name="avd_show_password__1" id="0x7f080004" />
+    <public type="drawable" name="avd_show_password__2" id="0x7f080005" />
     <public type="drawable" name="abc_action_bar_item_background_material" id="0x7f080007" />
     <public type="drawable" name="abc_btn_borderless_material" id="0x7f080008" />
     <public type="drawable" name="abc_btn_check_material" id="0x7f080009" />

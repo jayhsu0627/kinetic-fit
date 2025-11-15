@@ -50,15 +50,43 @@ If you need to rebuild the APK from this decompiled source:
 # Install apktool (if not already installed)
 # Download from: https://ibotpeaches.github.io/Apktool/
 
-# Build APK
-apktool b kinetic-fit -o kinetic-fit-rebuilt.apk
+# Build APK (NOTE: Must use --use-aapt2 flag)
+apktool b . -o kinetic-fit-bypass.apk --use-aapt2
 
-# Sign the APK (optional, but required for installation)
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore kinetic-fit-rebuilt.apk alias_name
+# Sign the APK (required for installation)
+# Option 1: Create a new keystore
+keytool -genkey -v -keystore my-release-key.keystore -alias kinetic-fit -keyalg RSA -keysize 2048 -validity 10000
+
+# Option 2: Use debug keystore (for testing)
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/.android/debug.keystore kinetic-fit-bypass.apk androiddebugkey
+# Password: "android"
 
 # Align the APK (optional but recommended)
-zipalign -v 4 kinetic-fit-rebuilt.apk kinetic-fit-aligned.apk
+zipalign -v 4 kinetic-fit-bypass.apk kinetic-fit-bypass-aligned.apk
 ```
+
+### Build Fixes Applied
+
+#### Resource File Names
+- **Fixed invalid resource filenames**: Renamed drawable files containing `$` characters to comply with Android resource naming rules
+  - `$avd_hide_password__0.xml` → `avd_hide_password__0.xml`
+  - `$avd_hide_password__1.xml` → `avd_hide_password__1.xml`
+  - `$avd_hide_password__2.xml` → `avd_hide_password__2.xml`
+  - `$avd_show_password__0.xml` → `avd_show_password__0.xml`
+  - `$avd_show_password__1.xml` → `avd_show_password__1.xml`
+  - `$avd_show_password__2.xml` → `avd_show_password__2.xml`
+- **Updated resource references**: Fixed references in:
+  - `res/values/public.xml` - Updated public resource declarations
+  - `res/drawable/avd_hide_password.xml` - Updated drawable references
+  - `res/drawable/avd_show_password.xml` - Updated drawable references
+
+#### Build Tool Requirements
+- **Must use `--use-aapt2` flag**: The build requires `aapt2` instead of the older `aapt` tool due to resource compilation issues
+- **aapt2 availability**: Ensure `aapt2` is installed and available in your PATH (usually comes with Android SDK build-tools)
+
+### Build Notes
+
+⚠️ **Important**: The build process requires the `--use-aapt2` flag. Without it, the build will fail with resource compilation errors. This is due to compatibility issues between the decompiled resources and the older `aapt` tool.
 
 ## 🔓 Login Bypass Modifications
 
@@ -106,7 +134,14 @@ The bypass creates a pseudo-user profile with the following details:
 
 ### Rebuilding with Bypass
 
-The modifications are already in the smali files. Simply rebuild the APK as described in the "Rebuilding the APK" section above.
+The modifications are already in the smali files. To rebuild the APK with the bypass enabled:
+
+```bash
+cd /home/jayhsu/Downloads/kinetic-fit
+apktool b . -o kinetic-fit-bypass.apk --use-aapt2
+```
+
+**Note**: Always use the `--use-aapt2` flag when rebuilding. See the "Rebuilding the APK" section for signing instructions.
 
 ## 📋 Features
 
