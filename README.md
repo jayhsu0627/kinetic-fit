@@ -1,6 +1,12 @@
 # Kinetic Fit - Decompiled APK
 
-This repository contains the decompiled source code of the Kinetic Fit Android application.
+This repository contains the decompiled source code of the Kinetic Fit Android application, with modifications to bypass login requirements and enable offline use.
+
+## 🚀 Quick Start
+
+**For most users**: Download the pre-built APK from the [Releases page](https://github.com/yourusername/kinetic-fit/releases) and install it on your Android device.
+
+**For developers**: See the "Rebuilding the APK" section below.
 
 ## 📱 Project Information
 
@@ -11,36 +17,158 @@ This repository contains the decompiled source code of the Kinetic Fit Android a
 - **Target SDK Version**: 28 (Android 9.0 Pie)
 - **Decompiled Using**: apktool 2.7.0
 
-## 📂 Project Structure
+## 🎯 Why I Need This App
 
-```
-kinetic-fit/
-├── AndroidManifest.xml          # Application manifest
-├── apktool.yml                  # Apktool configuration
-├── res/                         # Android resources (layouts, drawables, values)
-├── smali/                       # Dalvik bytecode (smali format)
-├── smali_classes2/              # Additional Dalvik bytecode classes
-├── smali_classes3/              # Additional Dalvik bytecode classes
-├── lib/                         # Native libraries (JNI)
-│   ├── arm64-v8a/
-│   ├── armeabi-v7a/
-│   ├── mips/
-│   ├── x86/
-│   └── x86_64/
-├── assets/                      # Raw asset files
-├── kotlin/                      # Kotlin metadata files
-├── META-INF/                    # Metadata and service definitions
-└── original/                    # Original manifest and metadata
-```
+I have a **Kinetic T-6400** trainer, and the official Kinetic Fit app has been removed from Google Play. While other platforms (like MyWhoosh, Zwift, etc.) can perform calibration, they don't show the **spindown time in seconds** - which is crucial for making accurate adjustments to match my power meter readings.
 
-## 🔧 Requirements
+This app allows me to:
+- See the exact spindown time (in seconds) after calibration
+- Make precise adjustments to roller tension
+- Compare trainer power with my power meter
+- Fine-tune the calibration for better accuracy
 
-To work with this decompiled APK, you'll need:
+## 🔬 Understanding Spindown Calibration
 
-- **Java Development Kit (JDK)** 8 or higher
-- **Android SDK** with platform-tools
-- **Apktool** 2.7.0 or compatible version
-- **Build tools** for Android SDK 28
+### What is Spindown Calibration?
+
+As explained by Jason from Kinetic:
+
+> "Spindown calibration is to determine the rolling resistance created by the tire and roller, not about the circumference of the wheel. It adjusts the power curve based on that result."
+
+### How Spindown Affects Power
+
+The trainer calculates power using a formula that includes a **spindown correction factor**. This correction adjusts the base power curve based on your measured rolling resistance:
+
+1. **Base Power**: `P_base = 5.24482 × v_mph + 0.019168 × v_mph³`
+   - Calculated from speed alone
+
+2. **Spindown Correction**: Applied based on your measured spindown time
+   - **Regular Flywheel** (1.5-6.5s): Different correction formula
+   - **ProFlywheel** (4.7-6.5s): Different correction formula
+
+3. **Final Power**: `P_final = P_base + correction`
+
+### Power Curve Visualization
+
+The spindown time significantly affects the power curve at all speeds. Here's how different spindown times change the power readings:
+
+![Power Curve Visualization](power_curve_visualization.png)
+
+**Key Observations:**
+- **Faster spindown** (1.5-3.0s) = Higher rolling resistance = **Lower power readings** (negative correction)
+- **Slower spindown** (4.7-6.5s) = Lower rolling resistance = **Higher power readings** (positive correction)
+- The correction affects **all speeds**, not just one point
+
+### Spindown Time Interpretation
+
+- **Fast Spindown (1.5-3.0s)**: High rolling resistance
+  - Tire not properly inflated
+  - High tire-to-roller friction
+  - Results in **lower power** readings
+
+- **Medium Spindown (3.0-4.7s)**: Normal rolling resistance (Regular flywheel)
+  - Typical trainer setup
+  - Balanced power readings
+
+- **Slow Spindown (4.7-6.5s)**: Low rolling resistance (ProFlywheel)
+  - Well-inflated tire
+  - Smooth roller
+  - Results in **higher power** readings
+
+**Why This Matters**: By knowing your exact spindown time, you can make informed adjustments to tire pressure and roller tension to achieve better power meter matching.
+
+## 📖 My Calibration Experience
+
+Here's my step-by-step process for calibrating my Kinetic T-6400:
+
+### Step 0: Why I Need This App
+I have a Kinetic T-6400, and the app is no longer available on Google Play. Other platforms (like MyWhoosh) can do calibration, but they don't show the spindown time in seconds. I need this app to see the exact spindown time so I can make accurate adjustments to match my power meter.
+
+### Step 1: Initial Setup
+- Pumped my bike tire to **100 PSI**
+- Tightened the roller knob until it just touches the tire
+- Then tightened **3 more full rotations**
+
+### Step 2: First Spindown Test
+- Performed spindown calibration in the app
+- Result: **5.68 seconds**
+
+### Step 3: Power Meter Comparison
+- Compared trainer power vs. my power meter:
+  - At low power: Trainer **60W** vs. Power meter **45W** (trainer reads higher)
+  - At high power: Trainer **180W** vs. Power meter **160W** (trainer reads higher)
+- **Conclusion**: The trainer is reading harder than real-world (higher power)
+
+### Step 4: First Adjustment
+- **Loosened the knob by 1/5 rotation** (to reduce friction)
+- Goal: Reduce rolling resistance to lower power readings
+
+### Step 5: Problem Encountered
+- Redid spindown calibration
+- **Issue**: Tire started **slipping when applying high torque**
+- This indicates the roller tension was too loose
+
+### Step 6: Final Adjustment
+- **Tightened the knob by 2/5 rotation** (net: +1/5 from original)
+- Redid spindown calibration
+- Result: **6.48 seconds** (slower spindown = less resistance)
+
+### Final Thoughts
+
+Despite multiple adjustments, the power still couldn't perfectly match my power meter. This is common with trainer calibration - achieving perfect accuracy is difficult due to:
+- Mechanical losses in the drivetrain
+- Tire type and condition variations
+- Roller wear and condition
+
+**My Solution**: I now use my **power meter as the primary power source** and the **trainer as secondary/controllable**. This gives me accurate power readings while still allowing the trainer to control resistance in apps like MyWhoosh.
+
+**Reference**: For more detailed calibration procedures, see this excellent article on [Wahoo KICKR Snap Spin Down Calibration](https://kidsandcowbells.wordpress.com/2016/12/12/wahoo-kickr-snap-spin-down-calibration/) - the principles apply to Kinetic trainers as well.
+
+## 🔓 Login Bypass Modifications
+
+This repository includes modifications to bypass the login requirement, as the original company has defunct and authentication servers are no longer available. These changes allow the app to function without requiring server-side authentication.
+
+### Modifications Made
+
+#### 1. Login Dispatch Activity (`smali_classes2/com/kinetic/fit/ui/login/LoginDispathActivity.smali`)
+- **Modified `runDispatch()` method**: Now bypasses both login and synchronization screens
+- **Added `getRootIntent()` method**: Creates intent to directly launch RootActivity
+- **Result**: App launches directly to the main interface, skipping authentication
+
+#### 2. Profile Class (`smali_classes2/com/kinetic/fit/data/realm_objects/Profile.smali`)
+- **Modified `current()` method**: Automatically creates a mock "admin" user profile if none exists in the Realm database
+  - Creates profile with username: "admin"
+  - Email: "admin@kinetic.fit"
+  - Session token: "admin-token"
+- **Modified `getCurrentName()` method**: Returns "admin" as default when no profile exists
+- **Modified `getMainEmail()` method**: Returns "admin@kinetic.fit" as default when no profile exists
+
+### How It Works
+
+1. On app launch, `LoginDispathActivity` is the entry point
+2. Instead of checking for authentication and routing to login or sync screens, it now directly navigates to `RootActivity`
+3. When the app queries for user profile information:
+   - If no profile exists in the Realm database, an admin profile is automatically created
+   - Profile getter methods return admin values as fallbacks
+4. User profile synchronization is bypassed entirely
+
+### Testing Results
+
+✅ **Verified Working**:
+- App launches successfully without login screen
+- Bypasses authentication and synchronization screens
+- Opens directly to main interface (RootActivity)
+- Admin profile is automatically created
+- Spindown calibration works correctly
+- Spindown time is displayed in seconds
+
+⚠️ **Known Issues**:
+- **Bluetooth Device Detection**: Some Bluetooth trainer devices (e.g., Kinetic T-6400, shown as 'Kinetic 3D:FD' in Bluetooth settings) may not appear in the app's device list even when connected via phone Bluetooth settings. This may be due to:
+  - Missing or incompatible BLE (Bluetooth Low Energy) service discovery
+  - Device pairing requirements that differ from standard Bluetooth pairing
+  - App-specific device filtering or discovery protocols
+  
+  **Workaround**: The device may need to be discovered/paired directly through the app's sensor discovery feature rather than through system Bluetooth settings.
 
 ## 🛠️ Rebuilding the APK
 
@@ -113,77 +241,36 @@ adb install kinetic-fit-bypass.apk
 
 **Note**: If you get `INSTALL_FAILED_UPDATE_INCOMPATIBLE`, the existing app was signed with a different key. Uninstall the old version first, then install the new one.
 
-## 🔓 Login Bypass Modifications
+## 📂 Project Structure
 
-This repository includes modifications to bypass the login requirement, as the original company has defunct and authentication servers are no longer available. These changes allow the app to function without requiring server-side authentication.
-
-### Modifications Made
-
-#### 1. Login Dispatch Activity (`smali_classes2/com/kinetic/fit/ui/login/LoginDispathActivity.smali`)
-- **Modified `runDispatch()` method**: Now bypasses both login and synchronization screens
-- **Added `getRootIntent()` method**: Creates intent to directly launch RootActivity
-- **Result**: App launches directly to the main interface, skipping authentication
-
-#### 2. Profile Class (`smali_classes2/com/kinetic/fit/data/realm_objects/Profile.smali`)
-- **Modified `current()` method**: Automatically creates a mock "admin" user profile if none exists in the Realm database
-  - Creates profile with username: "admin"
-  - Email: "admin@kinetic.fit"
-  - Session token: "admin-token"
-- **Modified `getCurrentName()` method**: Returns "admin" as default when no profile exists
-- **Modified `getMainEmail()` method**: Returns "admin@kinetic.fit" as default when no profile exists
-
-### How It Works
-
-1. On app launch, `LoginDispathActivity` is the entry point
-2. Instead of checking for authentication and routing to login or sync screens, it now directly navigates to `RootActivity`
-3. When the app queries for user profile information:
-   - If no profile exists in the Realm database, an admin profile is automatically created
-   - Profile getter methods return admin values as fallbacks
-4. User profile synchronization is bypassed entirely
-
-### Admin User Profile
-
-The bypass creates a pseudo-user profile with the following details:
-- **Name**: admin
-- **Email**: admin@kinetic.fit
-- **Username**: admin@kinetic.fit
-- **Object ID**: admin
-- **Session Token**: admin-token
-
-### Important Notes
-
-- ⚠️ These modifications are **for educational/research purposes only**
-- ⚠️ The modifications allow offline use of the app since authentication servers are unavailable
-- ⚠️ User profile synchronization functionality has been disabled
-- ⚠️ Some features that require server-side authentication may not work
-
-### Testing Results
-
-✅ **Verified Working**:
-- App launches successfully without login screen
-- Bypasses authentication and synchronization screens
-- Opens directly to main interface (RootActivity)
-- Admin profile is automatically created
-
-⚠️ **Known Issues**:
-- **Bluetooth Device Detection**: Some Bluetooth trainer devices (e.g., Kinetic T-6400, shown as 'Kinetic 3D:FD' in Bluetooth settings) may not appear in the app's device list even when connected via phone Bluetooth settings. This may be due to:
-  - Missing or incompatible BLE (Bluetooth Low Energy) service discovery
-  - Device pairing requirements that differ from standard Bluetooth pairing
-  - App-specific device filtering or discovery protocols
-  - Potential need for additional permissions or service configurations
-  
-  **Workaround**: The device may need to be discovered/paired directly through the app's sensor discovery feature rather than through system Bluetooth settings.
-
-### Rebuilding with Bypass
-
-The modifications are already in the smali files. To rebuild the APK with the bypass enabled:
-
-```bash
-cd /home/jayhsu/Downloads/kinetic-fit
-apktool b . -o kinetic-fit-bypass.apk --use-aapt2
+```
+kinetic-fit/
+├── AndroidManifest.xml          # Application manifest
+├── apktool.yml                  # Apktool configuration
+├── res/                         # Android resources (layouts, drawables, values)
+├── smali/                       # Dalvik bytecode (smali format)
+├── smali_classes2/              # Additional Dalvik bytecode classes
+├── smali_classes3/              # Additional Dalvik bytecode classes
+├── lib/                         # Native libraries (JNI)
+│   ├── arm64-v8a/
+│   ├── armeabi-v7a/
+│   ├── mips/
+│   ├── x86/
+│   └── x86_64/
+├── assets/                      # Raw asset files
+├── kotlin/                      # Kotlin metadata files
+├── META-INF/                    # Metadata and service definitions
+└── original/                    # Original manifest and metadata
 ```
 
-**Note**: Always use the `--use-aapt2` flag when rebuilding. See the "Rebuilding the APK" section for signing instructions.
+## 🔧 Requirements
+
+To work with this decompiled APK, you'll need:
+
+- **Java Development Kit (JDK)** 8 or higher
+- **Android SDK** with platform-tools
+- **Apktool** 2.7.0 or compatible version
+- **Build tools** for Android SDK 28
 
 ## 📋 Features
 
@@ -191,11 +278,22 @@ Based on the manifest and code structure, this application includes:
 
 - **Fitness Tracking**: Activity and workout tracking
 - **Bluetooth LE Support**: Device connectivity (requires BLE hardware)
+- **Spindown Calibration**: Accurate calibration with spindown time display
 - **Google Play Services Integration**: Maps, location, fitness APIs
-- **Cloud Sync**: Data synchronization services
+- **Cloud Sync**: Data synchronization services (disabled in this version)
 - **Cast Support**: Google Cast integration
 - **Zendesk Integration**: Customer support
 - **Crashlytics**: Crash reporting via Fabric
+
+## 📚 Additional Documentation
+
+For more detailed information, see:
+
+- **`CALIBRATION_ANALYSIS.md`** - Complete technical analysis of the spindown calibration algorithm
+- **`CALIBRATION_FAQ.md`** - FAQ covering common calibration questions
+- **`SPINDOWN_TROUBLESHOOTING.md`** - Troubleshooting guide for calibration issues
+- **`POWER_DISCREPANCY_ANALYSIS.md`** - Analysis of power meter vs. trainer discrepancies
+- **`SPINDOWN_TIME_SUMMARY.md`** - Summary of spindown time ranges by trainer model
 
 ## ⚠️ Legal Notice
 
@@ -237,56 +335,6 @@ The application uses several libraries including:
 - **Kotlin** standard library
 - **Crashlytics** for crash reporting
 - **Zendesk** for customer support
-
-## 🔬 Spindown Calibration Analysis
-
-The repository includes an analysis of the spindown calibration algorithm used by Kinetic trainers. This calibration determines rolling resistance and adjusts the power curve accordingly.
-
-### Power Calculation Formula
-
-The power calculation consists of:
-
-1. **Base Power**: `P_base = 5.24482 × v_mph + 0.019168 × v_mph³`
-   - Where `v_mph = speed_kph × 0.621371`
-
-2. **Spindown Calibration Correction**:
-   - **Regular Flywheel** (spindown 1.5-6.5s): `correction = 4.55 × spindown_ms × P_base × 10⁻⁵ + (-0.1425) × spindown_ms + 236.2`
-   - **ProFlywheel** (spindown 4.7-6.5s): `correction = 2.62 × spindown_ms × P_base × 10⁻⁵ + (-0.021) × spindown_ms + 104.97`
-
-3. **Final Power**: `P_final = P_base + correction`
-
-### Files
-
-- **Analysis Document**: `CALIBRATION_ANALYSIS.md` - Detailed explanation of the calibration algorithm
-- **Visualization Script**: `power_curve_visualizer.py` - Python script to visualize power curves
-- **Visualization Output**: `power_curve_visualization.png` - Generated power curve graphs
-
-### Running the Visualization
-
-```bash
-# Install dependencies (if needed)
-pip3 install matplotlib numpy
-
-# Run the visualization
-python3 power_curve_visualizer.py
-```
-
-This will generate power curves showing how spindown calibration affects power readings at different speeds.
-
-**Source Code**: The calibration logic is found in `smali_classes2/com/kinetic/sdk/inride/b.smali` (lines 912-1016)
-
-### FAQ
-
-For answers to common questions about spindown calibration, see:
-- **`CALIBRATION_FAQ.md`** - Detailed FAQ covering:
-  - How spindown is measured (device vs. app)
-  - Why calibration might end early (wheel still rotating)
-  - Whether spindown time can be manually adjusted
-- **`SPINDOWN_TROUBLESHOOTING.md`** - Troubleshooting guide for:
-  - Adjusting spindown time (too fast/too slow)
-  - Tire pressure and roller tension adjustments
-  - Power meter comparison issues
-  - Flywheel type identification
 
 ## 🤝 Contributing
 
