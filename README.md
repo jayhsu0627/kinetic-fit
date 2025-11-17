@@ -95,8 +95,8 @@ I have a Kinetic T-6400, and the app is no longer available on Google Play. Othe
 
 ### Step 3: Power Meter Comparison
 - Compared trainer power vs. my power meter:
-  - At low power: Trainer **60W** vs. Power meter **45W** (trainer reads higher)
-  - At high power: Trainer **180W** vs. Power meter **160W** (trainer reads higher)
+  - At low power: Power meter **60W** vs. Trainer **45W** (trainer reads higher)
+  - At high power: Power meter **180W** vs. Trainer**160W** (trainer reads higher)
 - **Conclusion**: The trainer is reading harder than real-world (higher power)
 
 ### Step 4: First Adjustment
