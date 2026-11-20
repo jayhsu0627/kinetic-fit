@@ -4,7 +4,7 @@ This repository contains the decompiled source code of the Kinetic Fit Android a
 
 ## 🚀 Quick Start
 
-**For most users**: Download the pre-built APK from the [Releases page](https://github.com/yourusername/kinetic-fit/releases) and install it on your Android device.
+**For most users**: Download the pre-built APK from the [Releases page](https://github.com/jayhsu0627/kinetic-fit/releases) and install it on your Android device.
 
 **For developers**: See the "Rebuilding the APK" section below.
 
