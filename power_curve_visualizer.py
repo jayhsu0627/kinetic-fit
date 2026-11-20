@@ -1,24 +1,31 @@
 #!/usr/bin/env python3
 """
-Kinetic Trainer Power Curve Visualizer
+Kinetic trainer power curve visualizer.
 
-Based on the calibration code extracted from smali_classes2/com/kinetic/sdk/inride/b.smali
+Faithful port of the power calculation in
+smali_classes2/com/kinetic/sdk/inride/b.smali (inRide sensor path, also used by
+InRide2Service). Smart Control / FTMS trainers report power from the hardware
+and do not use this formula.
 
-The power calculation formula:
-1. Base power: P_base = 5.24482 * v_mph + 0.019168 * v_mph^3
-   where v_mph = speed_kph * 0.621371
+1. Base power (fluid unit curve):
+       P_base = 5.24482 * v_mph + 0.019168 * v_mph^3,   v_mph = speed_kph * 0.621371
 
-2. Spindown calibration correction:
-   - Spindown time determines rolling resistance
-   - Different coefficients for regular vs ProFlywheel
-   
-   Regular Flywheel (spindown 1.5-6.5s):
-     correction = 4.55 * spindown_ms * P_base * 1e-5 + (-0.1425) * spindown_ms + 236.2
-   
-   ProFlywheel (spindown 4.7-6.5s):
-     correction = 2.62 * spindown_ms * P_base * 1e-5 + (-0.021) * spindown_ms + 104.97
+2. Which spindown time is used (b.smali, around lines 747-796):
+       spindownTime defaults to 1.75 s, regular flywheel.
+       raw result in [1.5, 2.0] s  -> used as-is, regular flywheel   (Success)
+       raw result in [4.7, 6.5] s  -> used as-is, ProFlywheel        (Success)
+       anything else               -> stays at the 1.75 s default    (TooFast < 1.5,
+                                      Middle 2.0-4.7, TooSlow > 6.5)
+   The calibration screen shows the RAW result, so a displayed 3.2 s still means
+   the power formula is using 1.75 s.
 
-3. Final power: P_final = P_base + correction
+3. Correction (t_ms = spindownTime * 1000):
+       Regular:     4.55 * t_ms * P_base * 1e-5 - 0.1425 * t_ms + 236.2
+       ProFlywheel: 2.62 * t_ms * P_base * 1e-5 - 0.021  * t_ms + 104.97
+
+4. Final power = max(0, P_base + correction)
+
+Inside each window a FASTER spindown (more tire/roller drag) gives HIGHER power.
 
 As Jason from Kinetic explained:
 "Spindown calibration is to determine the rolling resistance created by the tire and roller,
@@ -26,240 +33,152 @@ not about the circumference of the wheel. It adjusts the power curve based on th
 """
 
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib import style
 
-# Power calculation constants
 KPH_TO_MPH = 0.621371
-
-# Base power coefficients
 BASE_LINEAR = 5.24482
 BASE_CUBIC = 0.019168
 
-# Spindown calibration coefficients
-REGULAR_COEFF_A = -0.1425
-REGULAR_COEFF_B = 4.55
-REGULAR_COEFF_C = 236.2
+# (A, B, C): correction = B * t_ms * P_base * 1e-5 + A * t_ms + C
+REGULAR_COEFFS = (-0.1425, 4.55, 236.2)
+PROFLYWHEEL_COEFFS = (-0.021, 2.62, 104.97)
 
-PROFLYWHEEL_COEFF_A = -0.021
-PROFLYWHEEL_COEFF_B = 2.62
-PROFLYWHEEL_COEFF_C = 104.97
+DEFAULT_SPINDOWN_S = 1.75          # used whenever the raw result is outside both windows
+REGULAR_WINDOW = (1.5, 2.0)
+PROFLYWHEEL_WINDOW = (4.7, 6.5)
 
-# Spindown time ranges (in seconds)
-REGULAR_SPINDOWN_MIN = 1.5
-REGULAR_SPINDOWN_MAX = 6.5
-PROFLYWHEEL_SPINDOWN_MIN = 4.7
-PROFLYWHEEL_SPINDOWN_MAX = 6.5
+# Spindowns from my own calibrations (README, "My Calibration Experience")
+MY_CALIBRATIONS = {"1st cal": 5.68, "2nd cal": 6.48}
+
 
 def calculate_base_power(speed_kph):
-    """
-    Calculate base power from speed (without spindown calibration).
-    
-    Args:
-        speed_kph: Speed in kilometers per hour
-        
-    Returns:
-        Base power in watts
-    """
-    speed_mph = speed_kph * KPH_TO_MPH
-    base_power = BASE_LINEAR * speed_mph + BASE_CUBIC * speed_mph ** 3
-    return base_power
+    v_mph = speed_kph * KPH_TO_MPH
+    return BASE_LINEAR * v_mph + BASE_CUBIC * v_mph ** 3
 
-def is_proflywheel(spindown_time_s):
-    """
-    Determine if this is a ProFlywheel based on spindown time.
-    
-    Args:
-        spindown_time_s: Spindown time in seconds
-        
-    Returns:
-        True if ProFlywheel (4.7-6.5s), False if regular (1.5-6.5s)
-    """
-    return PROFLYWHEEL_SPINDOWN_MIN <= spindown_time_s <= PROFLYWHEEL_SPINDOWN_MAX
+
+def calibration_status(raw_spindown_s):
+    """Status the app reports for a raw spindown result."""
+    if REGULAR_WINDOW[0] <= raw_spindown_s <= REGULAR_WINDOW[1]:
+        return "Success"
+    if PROFLYWHEEL_WINDOW[0] <= raw_spindown_s <= PROFLYWHEEL_WINDOW[1]:
+        return "Success"
+    if raw_spindown_s < REGULAR_WINDOW[0]:
+        return "TooFast"
+    if raw_spindown_s > PROFLYWHEEL_WINDOW[1]:
+        return "TooSlow"
+    return "Middle"
+
+
+def effective_spindown(raw_spindown_s):
+    """(spindown actually used by the power formula in seconds, is_proflywheel)."""
+    if REGULAR_WINDOW[0] <= raw_spindown_s <= REGULAR_WINDOW[1]:
+        return raw_spindown_s, False
+    if PROFLYWHEEL_WINDOW[0] <= raw_spindown_s <= PROFLYWHEEL_WINDOW[1]:
+        return raw_spindown_s, True
+    return DEFAULT_SPINDOWN_S, False
+
 
 def calculate_calibration_correction(base_power, spindown_time_s, is_pro=False):
-    """
-    Calculate spindown calibration correction.
-    
-    Args:
-        base_power: Base power in watts
-        spindown_time_s: Spindown time in seconds
-        is_pro: Whether this is a ProFlywheel
-        
-    Returns:
-        Calibration correction in watts
-    """
+    """Correction for an already-effective spindown time (no windowing here)."""
     if spindown_time_s <= 0 or base_power <= 0:
         return 0.0
-    
-    spindown_ms = spindown_time_s * 1000.0
-    
-    if is_pro:
-        coeff_a = PROFLYWHEEL_COEFF_A
-        coeff_b = PROFLYWHEEL_COEFF_B
-        coeff_c = PROFLYWHEEL_COEFF_C
-    else:
-        coeff_a = REGULAR_COEFF_A
-        coeff_b = REGULAR_COEFF_B
-        coeff_c = REGULAR_COEFF_C
-    
-    # Correction formula from the code:
-    # correction = coeff_b * spindown_ms * base_power * 1e-5 + coeff_a * spindown_ms + coeff_c
-    correction = (coeff_b * spindown_ms * base_power * 1e-5 + 
-                  coeff_a * spindown_ms + 
-                  coeff_c)
-    
-    return correction
+    a, b, c = PROFLYWHEEL_COEFFS if is_pro else REGULAR_COEFFS
+    t_ms = spindown_time_s * 1000.0
+    return b * t_ms * base_power * 1e-5 + a * t_ms + c
 
-def calculate_power(speed_kph, spindown_time_s):
-    """
-    Calculate final power including spindown calibration.
-    
-    Args:
-        speed_kph: Speed in kilometers per hour
-        spindown_time_s: Spindown time in seconds (from calibration)
-        
-    Returns:
-        Final power in watts
-    """
-    base_power = calculate_base_power(speed_kph)
-    
-    if spindown_time_s <= 0:
-        return max(0, base_power)
-    
-    is_pro = is_proflywheel(spindown_time_s)
-    correction = calculate_calibration_correction(base_power, spindown_time_s, is_pro)
-    
-    final_power = base_power + correction
-    
-    return max(0, final_power)  # Power can't be negative
 
-def visualize_power_curves():
-    """
-    Visualize power curves for different spindown calibration values.
-    """
-    # Speed range: 0-60 km/h (typical trainer range)
-    speeds_kph = np.linspace(0, 60, 300)
-    
-    # Different spindown times to visualize
-    spindown_times = [
-        2.0,   # Fast spindown (high rolling resistance, regular flywheel)
-        3.0,   # Medium spindown (regular flywheel)
-        4.0,   # Slower spindown (regular flywheel)
-        5.0,   # ProFlywheel territory
-        6.0,   # Slow spindown (low rolling resistance, ProFlywheel)
+def calculate_power(speed_kph, raw_spindown_s):
+    """Final power the app reports for a given speed and RAW spindown result."""
+    base = calculate_base_power(speed_kph)
+    t, is_pro = effective_spindown(raw_spindown_s)
+    return max(0.0, base + calculate_calibration_correction(base, t, is_pro))
+
+
+# --- plotting ---------------------------------------------------------------
+
+SURFACE = "#fcfcfb"
+TEXT = "#0b0b0b"
+TEXT_2 = "#52514e"
+GRID = "#e4e3df"
+FALLBACK_FILL = "#efeeea"
+SPEED_COLORS = {20: "#6da7ec", 30: "#2a78d6", 40: "#104281"}   # one-hue ramp, light -> dark
+
+
+def visualize_power_curves(path="power_curve_visualization.png"):
+    plt.rcParams.update({"font.size": 10, "axes.edgecolor": TEXT_2, "axes.labelcolor": TEXT,
+                         "xtick.color": TEXT_2, "ytick.color": TEXT_2})
+    fig, ax = plt.subplots(figsize=(11, 5.6), facecolor=SURFACE)
+    ax.set_facecolor(SURFACE)
+
+    x_min, x_max = 1.0, 7.2
+    zones = [  # (start, end, label, used_as_is)
+        (x_min, 1.5, "Too fast\n→ 1.75 s", False),
+        (1.5, 2.0, "Regular\nflywheel", True),
+        (2.0, 4.7, "Middle (failed)\n→ uses 1.75 s default", False),
+        (4.7, 6.5, "ProFlywheel", True),
+        (6.5, x_max, "Too slow\n→ 1.75 s", False),
     ]
-    
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
-    
-    # Plot 1: Power curves for different spindown times
-    ax1.set_title('Power Curve vs Speed\n(Effect of Spindown Calibration)', fontsize=14, fontweight='bold')
-    ax1.set_xlabel('Speed (km/h)', fontsize=12)
-    ax1.set_ylabel('Power (Watts)', fontsize=12)
-    ax1.grid(True, alpha=0.3)
-    
-    # Base power curve (no calibration)
-    base_powers = [calculate_base_power(s) for s in speeds_kph]
-    ax1.plot(speeds_kph, base_powers, '--', linewidth=2, label='Base Power (No Calibration)', color='gray')
-    
-    # Power curves with different spindown calibrations
-    colors = plt.cm.viridis(np.linspace(0, 1, len(spindown_times)))
-    
-    for spindown_time, color in zip(spindown_times, colors):
-        powers = [calculate_power(s, spindown_time) for s in speeds_kph]
-        flywheel_type = "ProFlywheel" if is_proflywheel(spindown_time) else "Regular"
-        ax1.plot(speeds_kph, powers, linewidth=2, 
-                label=f'Spindown {spindown_time:.1f}s ({flywheel_type})', color=color)
-    
-    ax1.legend(loc='upper left', fontsize=9)
-    ax1.set_xlim(0, 60)
-    ax1.set_ylim(0, None)
-    
-    # Plot 2: Power vs Spindown Time at different speeds
-    ax2.set_title('Power vs Spindown Time\n(Calibration Effect)', fontsize=14, fontweight='bold')
-    ax2.set_xlabel('Spindown Time (seconds)', fontsize=12)
-    ax2.set_ylabel('Power (Watts)', fontsize=12)
-    ax2.grid(True, alpha=0.3)
-    
-    spindown_range = np.linspace(1.0, 7.0, 200)
-    test_speeds = [20, 30, 40, 50]  # km/h
-    
-    colors_speed = plt.cm.plasma(np.linspace(0, 1, len(test_speeds)))
-    
-    for speed, color in zip(test_speeds, colors_speed):
-        powers_at_speed = []
-        for st in spindown_range:
-            power = calculate_power(speed, st)
-            powers_at_speed.append(power)
-        
-        ax2.plot(spindown_range, powers_at_speed, linewidth=2, 
-                label=f'{speed} km/h', color=color)
-    
-    # Mark spindown time zones
-    ax2.axvspan(REGULAR_SPINDOWN_MIN, REGULAR_SPINDOWN_MAX, alpha=0.1, color='blue', label='Regular Flywheel Zone')
-    ax2.axvspan(PROFLYWHEEL_SPINDOWN_MIN, PROFLYWHEEL_SPINDOWN_MAX, alpha=0.1, color='red', label='ProFlywheel Zone')
-    
-    ax2.legend(loc='upper right', fontsize=9)
-    ax2.set_xlim(1.0, 7.0)
-    ax2.set_ylim(0, None)
-    
-    plt.tight_layout()
-    plt.savefig('power_curve_visualization.png', dpi=150, bbox_inches='tight')
-    print("Power curve visualization saved as 'power_curve_visualization.png'")
-    plt.show()
+    for start, end, label, used in zones:
+        if not used:
+            ax.axvspan(start, end, color=FALLBACK_FILL, zorder=0, linewidth=0)
+        ax.text((start + end) / 2, 1.02, label, transform=ax.get_xaxis_transform(),
+                ha="center", va="bottom", fontsize=9, color=TEXT if used else TEXT_2,
+                fontweight="bold" if used else "normal")
 
-def print_formula_details():
-    """Print the power calculation formula details."""
-    print("=" * 70)
-    print("KINETIC TRAINER POWER CALCULATION FORMULA")
-    print("=" * 70)
-    print("\nSource: smali_classes2/com/kinetic/sdk/inride/b.smali")
-    print("\n1. BASE POWER CALCULATION:")
-    print("   - Convert speed: v_mph = speed_kph × 0.621371")
-    print(f"   - Formula: P_base = {BASE_LINEAR} × v_mph + {BASE_CUBIC} × v_mph³")
-    print("\n2. SPINDOWN CALIBRATION:")
-    print("   Spindown time determines rolling resistance (tire + roller friction)")
-    print("\n   Regular Flywheel (spindown 1.5-6.5 seconds):")
-    print(f"     correction = {REGULAR_COEFF_B} × spindown_ms × P_base × 10⁻⁵")
-    print(f"                  + ({REGULAR_COEFF_A}) × spindown_ms")
-    print(f"                  + {REGULAR_COEFF_C}")
-    print("\n   ProFlywheel (spindown 4.7-6.5 seconds):")
-    print(f"     correction = {PROFLYWHEEL_COEFF_B} × spindown_ms × P_base × 10⁻⁵")
-    print(f"                  + ({PROFLYWHEEL_COEFF_A}) × spindown_ms")
-    print(f"                  + {PROFLYWHEEL_COEFF_C}")
-    print("\n3. FINAL POWER:")
-    print("   P_final = P_base + correction")
-    print("   (Minimum power = 0 watts)")
-    print("\n" + "=" * 70)
-    print("\nNote from Kinetic:")
-    print('"Spindown calibration is to determine the rolling resistance created')
-    print('by the tire and roller, not about the circumference of the wheel.')
-    print('It adjusts the power curve based on that result."')
-    print("=" * 70 + "\n")
+    ax.axhline(0, color=TEXT_2, linewidth=1, zorder=1)
+
+    # Draw each zone as its own segment so the jumps at 1.5 / 2.0 / 4.7 / 6.5 s are not
+    # bridged by fake vertical lines.
+    for speed, color in SPEED_COLORS.items():
+        base = calculate_base_power(speed)
+        for i, (start, end, _, used) in enumerate(zones):
+            eps = 0 if used else 1e-6     # window edges belong to the "used as-is" windows
+            ts = np.linspace(start + eps, end - eps, 120)
+            corr = [calculate_power(speed, t) - base for t in ts]
+            ax.plot(ts, corr, color=color, linewidth=2, solid_capstyle="round", zorder=3,
+                    label=f"{speed} km/h (base {base:.0f} W)" if i == 0 else None)
+        ax.text(x_max + 0.05, calculate_power(speed, x_max) - base, f"{speed} km/h",
+                va="center", ha="left", fontsize=9, color=TEXT, clip_on=False)
+
+    for name, t in MY_CALIBRATIONS.items():
+        ax.axvline(t, color=TEXT, linewidth=1, linestyle=(0, (2, 2)), zorder=2)
+        ax.text(t, 0.04, f"my {name}\n{t:.2f} s", transform=ax.get_xaxis_transform(),
+                ha="center", va="bottom", fontsize=8.5, color=TEXT,
+                bbox=dict(boxstyle="round,pad=0.2", fc=SURFACE, ec="none"))
+
+    ax.set_xlim(x_min, x_max)
+    ax.set_xlabel("Raw spindown time shown in the app (s)")
+    ax.set_ylabel("Watts added to base power (W)")
+    ax.grid(True, color=GRID, linewidth=0.8, zorder=0)
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+    leg = ax.legend(loc="upper left", bbox_to_anchor=(0.26, 0.97), fontsize=9, frameon=True,
+                    facecolor=SURFACE, edgecolor=GRID, title="Speed", title_fontsize=9)
+    for txt in leg.get_texts():
+        txt.set_color(TEXT)
+    fig.suptitle("Kinetic spindown correction, as the app computes it",
+                 x=0.06, ha="left", fontsize=13, fontweight="bold", color=TEXT, y=0.995)
+    fig.text(0.06, 0.93, "Faster spindown → more power. Results outside the two windows "
+             "are replaced by a 1.75 s regular-flywheel default (shaded).",
+             ha="left", fontsize=9.5, color=TEXT_2)
+    fig.tight_layout(rect=(0, 0, 0.97, 0.94))
+    fig.savefig(path, dpi=150, facecolor=SURFACE)
+    print(f"Saved {path}")
+    if matplotlib.get_backend().lower() != "agg":
+        plt.show()
+
+
+def print_examples():
+    print(f"{'raw s':>6} {'status':8} {'used s':>6} {'flywheel':11} | final W at 20 / 30 / 40 km/h")
+    for raw in (1.5, 1.75, 2.0, 3.0, 4.7, 5.68, 6.48, 7.0):
+        t, pro = effective_spindown(raw)
+        watts = " / ".join(f"{calculate_power(v, raw):5.1f}" for v in (20, 30, 40))
+        print(f"{raw:6.2f} {calibration_status(raw):8} {t:6.2f} "
+              f"{'ProFlywheel' if pro else 'Regular':11} | {watts}")
+    print("base (no correction):", " / ".join(f"{calculate_base_power(v):5.1f}" for v in (20, 30, 40)))
+
 
 if __name__ == "__main__":
-    print_formula_details()
+    print_examples()
     visualize_power_curves()
-    
-    # Example calculations
-    print("\nExample Power Calculations:")
-    print("-" * 70)
-    test_cases = [
-        (30, 3.0, "Regular, medium resistance"),
-        (30, 5.5, "ProFlywheel, low resistance"),
-        (40, 2.5, "Regular, high resistance"),
-        (40, 6.0, "ProFlywheel, very low resistance"),
-    ]
-    
-    for speed_kph, spindown_s, description in test_cases:
-        base = calculate_base_power(speed_kph)
-        final = calculate_power(speed_kph, spindown_s)
-        correction = final - base
-        flywheel_type = "ProFlywheel" if is_proflywheel(spindown_s) else "Regular"
-        
-        print(f"\nSpeed: {speed_kph} km/h | Spindown: {spindown_s}s ({flywheel_type})")
-        print(f"  Base Power:     {base:7.2f} W")
-        print(f"  Correction:     {correction:7.2f} W")
-        print(f"  Final Power:    {final:7.2f} W")
-        print(f"  Description:    {description}")
-
