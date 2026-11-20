@@ -239,6 +239,10 @@
     .locals 1
 
     .line 43
+    # OFFLINE FIX - fill in FTP, heart rates, birth date and zones on the
+    # placeholder profile (needed by Free Ride and the Profile screen)
+    invoke-static {}, Lcom/kinetic/fit/data/realm_objects/Profile;->ensureOfflineDefaults()V
+
     # BYPASS LOGIN - Go directly to RootActivity
     invoke-direct {p0}, Lcom/kinetic/fit/ui/login/LoginDispathActivity;->getRootIntent()Landroid/content/Intent;
 

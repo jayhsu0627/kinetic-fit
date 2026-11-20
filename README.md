@@ -14,15 +14,17 @@ I made it so I could run **spindown calibration** on my Kinetic T-6400 and see t
 
 Needs Android 5.0 or newer with Bluetooth. If the original Kinetic app is still on your phone, uninstall it first.
 
+**Updating:** install the new version over the old one. There's no need to uninstall first, and your data is kept.
+
 ## What works and what doesn't
 
 - ✅ **Connecting** Kinetic sensors and heart rate monitors
 - ✅ **Spindown calibration**, with the time shown in seconds
+- ✅ **Free Ride** (version 1.0.2 and later), with laps and a results screen showing per-lap stats, TSS and IF
 - ❌ **Workouts, training plans and videos.** These were downloaded from Kinetic's servers, which are shut down, so the list is empty. They can't be restored.
 - ❌ **Account login and cloud sync.** The app uses a built-in placeholder account instead.
-- ❓ **Free Ride.** It's listed at the top of the Workouts screen, but I haven't ridden with it myself.
 
-**Tip:** I use this app only for calibration, then ride in a free app like MyWhoosh.
+**Set your FTP:** the app starts with an FTP of 200 W and a max heart rate of 185. For correct TSS, IF and zones, open the **menu (☰) → Profile**, enter your own values, and tap **Save & Exit**.
 
 ## Common questions
 
@@ -34,6 +36,9 @@ Android requires location permission for this app to scan for Bluetooth sensors.
 
 **Where did my workouts go?**
 See the list above. Everything except Free Ride came from Kinetic's servers.
+
+**How do I use Free Ride?**
+Tap **Workout** on the main screen, then **Free Ride**, then **Warmup**. Skip the 10-minute warm-up if you like. During the ride, tap **Lap** to start a new segment. When you're done, tap **Pause → End → Results**.
 
 ## Understanding spindown calibration
 
@@ -113,11 +118,14 @@ This repository is the Kinetic Fit 1.4.23 APK (`com.kinetic.fit`, versionCode 22
 
 - `smali_classes2/com/kinetic/fit/ui/login/LoginDispathActivity.smali`: `runDispatch()` skips the login and sync screens and opens `RootActivity` directly (via a new `getRootIntent()`).
 - `smali_classes2/com/kinetic/fit/data/realm_objects/Profile.smali`: `current()` creates a placeholder "admin" profile if none exists. `getCurrentName()` and `getMainEmail()` return placeholder values.
+- `Profile.ensureOfflineDefaults()` (new, called from `runDispatch()` on every launch) fills empty profile fields with defaults: FTP 200, max/resting heart rate 185/60, 70 kg, 175 cm, birth date 1990-01-01, plus auto-calculated power and heart zones. Without zones, Free Ride crashes (`WorkoutGraphView` reads the last power zone). Without a birth date, the Profile screen crashes.
 - Drawable files whose names contained `$` (`$avd_hide_password__0.xml` etc.) were renamed, with references updated in `res/values/public.xml` and `res/drawable/avd_{hide,show}_password.xml`, so the APK rebuilds.
 
 ### Build and install
 
 Requires apktool and the Android SDK build tools (`aapt2`, `zipalign`, `jarsigner`). The `--use-aapt2` flag is required.
+
+Note: this repo is missing about 29 non-code files from the original APK because `.gitignore` excludes them (for example `google.jks` and joda-time's `*.properties`). A full rebuild drops them. Release APKs are built by replacing only `classes2.dex` in the previous release APK, then running `zipalign` and `apksigner`.
 
 ```bash
 apktool b . -o kinetic-fit-bypass.apk --use-aapt2

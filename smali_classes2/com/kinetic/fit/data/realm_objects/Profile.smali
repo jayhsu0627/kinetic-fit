@@ -4723,3 +4723,130 @@
 
     return-void
 .end method
+
+# OFFLINE FIX - give the placeholder "admin" profile the values a real
+# Kinetic account used to receive from the server (FTP, heart rates, body
+# size, birth date, power/heart zones). Without them Free Ride crashes
+# (WorkoutGraphView reads the last power zone) and the Profile screen
+# crashes (null birth date). Only empty fields are filled, so values the
+# user has set are kept. Any error is swallowed so app start never breaks.
+.method public static ensureOfflineDefaults()V
+    .locals 7
+
+    invoke-static {}, Lcom/kinetic/fit/data/realm_objects/Profile;->current()Lcom/kinetic/fit/data/realm_objects/Profile;
+
+    invoke-static {}, Lio/realm/Realm;->getDefaultInstance()Lio/realm/Realm;
+    move-result-object v0
+
+    :try_start
+    const-class v1, Lcom/kinetic/fit/data/realm_objects/Profile;
+    invoke-virtual {v0, v1}, Lio/realm/Realm;->where(Ljava/lang/Class;)Lio/realm/RealmQuery;
+    move-result-object v1
+    invoke-virtual {v1}, Lio/realm/RealmQuery;->findFirst()Ljava/lang/Object;
+    move-result-object v1
+    check-cast v1, Lcom/kinetic/fit/data/realm_objects/Profile;
+    if-eqz v1, :done
+
+    invoke-virtual {v0}, Lio/realm/Realm;->beginTransaction()V
+
+    # FTP 200 W
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getPowerFTP()I
+    move-result v2
+    if-gtz v2, :ftp_ok
+    const/16 v2, 0xc8
+    invoke-virtual {v1, v2}, Lcom/kinetic/fit/data/realm_objects/Profile;->setPowerFTP(I)V
+    :ftp_ok
+
+    # max heart rate 185 bpm
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getHeartMax()I
+    move-result v2
+    if-gtz v2, :hrmax_ok
+    const/16 v2, 0xb9
+    invoke-virtual {v1, v2}, Lcom/kinetic/fit/data/realm_objects/Profile;->setHeartMax(I)V
+    :hrmax_ok
+
+    # resting heart rate 60 bpm
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getHeartResting()I
+    move-result v2
+    if-gtz v2, :hrrest_ok
+    const/16 v2, 0x3c
+    invoke-virtual {v1, v2}, Lcom/kinetic/fit/data/realm_objects/Profile;->setHeartResting(I)V
+    :hrrest_ok
+
+    # weight 70 kg
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getWeightKG()D
+    move-result-wide v2
+    const-wide/16 v4, 0x0
+    cmpl-double v6, v2, v4
+    if-gtz v6, :weight_ok
+    const-wide v2, 0x4051800000000000L    # 70.0
+    invoke-virtual {v1, v2, v3}, Lcom/kinetic/fit/data/realm_objects/Profile;->setWeightKG(D)V
+    :weight_ok
+
+    # height 175 cm
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getHeightCM()D
+    move-result-wide v2
+    const-wide/16 v4, 0x0
+    cmpl-double v6, v2, v4
+    if-gtz v6, :height_ok
+    const-wide v2, 0x4065e00000000000L    # 175.0
+    invoke-virtual {v1, v2, v3}, Lcom/kinetic/fit/data/realm_objects/Profile;->setHeightCM(D)V
+    :height_ok
+
+    # birth date 1990-01-01
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getBirthdate()Ljava/util/Date;
+    move-result-object v2
+    if-nez v2, :birth_ok
+    new-instance v2, Ljava/util/Date;
+    const-wide v4, 0x92f62a6a00L    # 1990-01-01T12:00Z in ms
+    invoke-direct {v2, v4, v5}, Ljava/util/Date;-><init>(J)V
+    invoke-virtual {v1, v2}, Lcom/kinetic/fit/data/realm_objects/Profile;->setBirthdate(Ljava/util/Date;)V
+    :birth_ok
+
+    # power zones from FTP if missing ("" / null / "[]")
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getPowerZonesCacheString()Ljava/lang/String;
+    move-result-object v2
+    if-eqz v2, :pz_calc
+    invoke-virtual {v2}, Ljava/lang/String;->length()I
+    move-result v3
+    const/4 v4, 0x3
+    if-ge v3, v4, :pz_ok
+    :pz_calc
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->autoCalculatePowerZones()V
+    :pz_ok
+
+    # heart zones from max heart rate if missing
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->getHeartZonesCacheSTring()Ljava/lang/String;
+    move-result-object v2
+    if-eqz v2, :hz_calc
+    invoke-virtual {v2}, Ljava/lang/String;->length()I
+    move-result v3
+    const/4 v4, 0x3
+    if-ge v3, v4, :hz_ok
+    :hz_calc
+    invoke-virtual {v1}, Lcom/kinetic/fit/data/realm_objects/Profile;->autoCalculateHeartZones()V
+    :hz_ok
+
+    invoke-virtual {v0}, Lio/realm/Realm;->commitTransaction()V
+
+    :done
+    invoke-virtual {v0}, Lio/realm/Realm;->close()V
+    :try_end
+    .catchall {:try_start .. :try_end} :on_error
+
+    return-void
+
+    :on_error
+    move-exception v1
+    invoke-virtual {v0}, Lio/realm/Realm;->isInTransaction()Z
+    move-result v2
+    if-eqz v2, :err_close
+    invoke-virtual {v0}, Lio/realm/Realm;->cancelTransaction()V
+    :err_close
+    invoke-virtual {v0}, Lio/realm/Realm;->isClosed()Z
+    move-result v2
+    if-nez v2, :err_done
+    invoke-virtual {v0}, Lio/realm/Realm;->close()V
+    :err_done
+    return-void
+.end method
