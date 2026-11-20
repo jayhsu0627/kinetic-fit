@@ -105,7 +105,7 @@ FALLBACK_FILL = "#efeeea"
 SPEED_COLORS = {20: "#6da7ec", 30: "#2a78d6", 40: "#104281"}   # one-hue ramp, light -> dark
 
 
-def visualize_power_curves(path="power_curve_visualization.png"):
+def visualize_power_curves(path="spindown_power_chart.png"):
     plt.rcParams.update({"font.size": 10, "axes.edgecolor": TEXT_2, "axes.labelcolor": TEXT,
                          "xtick.color": TEXT_2, "ytick.color": TEXT_2})
     fig, ax = plt.subplots(figsize=(11, 5.6), facecolor=SURFACE)

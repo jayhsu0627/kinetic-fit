@@ -69,7 +69,7 @@ So if you compare against a power meter:
 
 **Stay inside the range.** With a Pro flywheel, don't go below 4.7 s. Just below it, the app ignores your result and the reading drops by 20–40 W.
 
-![How spindown time changes the trainer's watts](power_curve_visualization.png)
+![How spindown time changes the trainer's watts](spindown_power_chart.png)
 
 *Each line is a riding speed. Lines slope down as the spindown gets longer, meaning fewer watts. In the shaded areas the app ignores your result and uses a default.*
 
