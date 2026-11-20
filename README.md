@@ -6,6 +6,11 @@ I made it so I could run **spindown calibration** on my Kinetic T-6400 and see t
 
 > Not affiliated with Kinetic. Shared as-is for personal use, with no support or warranty.
 
+## Updates
+
+- **Nov 20, 2026: version 1.0.2.** **Free Ride now works**, with laps and a results screen (per-lap stats, TSS, IF). Fixed the crashes when opening Free Ride or the Profile screen. Install it over 1.0.1; there's no need to uninstall. Then set your FTP under menu (☰) → Profile.
+- **Nov 15, 2025: version 1.0.1.** First release: opens without login, with spindown calibration.
+
 ## Install
 
 1. On your Android phone, open the [latest release](https://github.com/jayhsu0627/kinetic-fit/releases/latest) and download **`kinetic-fit-bypass.apk`**.
