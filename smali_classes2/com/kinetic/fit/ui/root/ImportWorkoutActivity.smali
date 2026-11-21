@@ -154,6 +154,10 @@
 .method private final makeThatWorkout()V
     .locals 3
 
+    # OFFLINE FIX - make sure the profile has FTP and zones even if the very
+    # first thing the user does is open a workout file
+    invoke-static {}, Lcom/kinetic/fit/data/realm_objects/Profile;->ensureOfflineDefaults()V
+
     .line 48
     :try_start_0
     invoke-virtual {p0}, Lcom/kinetic/fit/ui/root/ImportWorkoutActivity;->getIntent()Landroid/content/Intent;
@@ -166,7 +170,21 @@
 
     invoke-virtual {v0}, Landroid/content/Intent;->getData()Landroid/net/Uri;
 
-    move-result-object v0
+    move-result-object v1
+
+    # OFFLINE FIX - files shared via the Share menu arrive in EXTRA_STREAM
+    if-nez v1, :have_uri
+
+    const-string v1, "android.intent.extra.STREAM"
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/net/Uri;
+
+    :have_uri
+    move-object v0, v1
 
     const/4 v1, 0x0
 

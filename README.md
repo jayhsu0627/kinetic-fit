@@ -8,6 +8,7 @@ I made it so I could run **spindown calibration** on my Kinetic T-6400 and see t
 
 ## Updates
 
+- **Nov 20, 2026: version 1.0.3.** **Import structured workouts** from `.erg` and `.mrc` files, for example from TrainingPeaks, intervals.icu or converted Garmin workouts. Imported workouts are saved in Favorites, and there's no limit on how many you can ride. Install it over 1.0.2.
 - **Nov 20, 2026: version 1.0.2.** **Free Ride now works**, with laps and a results screen (per-lap stats, TSS, IF). Fixed the crashes when opening Free Ride or the Profile screen. Install it over 1.0.1; there's no need to uninstall. Then set your FTP under menu (☰) → Profile.
 - **Nov 15, 2025: version 1.0.1.** First release: opens without login, with spindown calibration.
 
@@ -26,7 +27,8 @@ Needs Android 5.0 or newer with Bluetooth. If the original Kinetic app is still 
 - ✅ **Connecting** Kinetic sensors and heart rate monitors
 - ✅ **Spindown calibration**, with the time shown in seconds
 - ✅ **Free Ride** (version 1.0.2 and later), with laps and a results screen showing per-lap stats, TSS and IF
-- ❌ **Workouts, training plans and videos.** These were downloaded from Kinetic's servers, which are shut down, so the list is empty. They can't be restored.
+- ✅ **Your own structured workouts** (version 1.0.3 and later), imported from `.erg` or `.mrc` files. See "How do I add structured workouts?" below.
+- ❌ **Kinetic's workouts, training plans and videos.** These were downloaded from Kinetic's servers, which are shut down, so the list is empty. They can't be restored.
 - ❌ **Account login and cloud sync.** The app uses a built-in placeholder account instead.
 
 **Set your FTP:** the app starts with an FTP of 200 W and a max heart rate of 185. For correct TSS, IF and zones, open the **menu (☰) → Profile**, enter your own values, and tap **Save & Exit**.
@@ -40,10 +42,27 @@ Connecting it in your phone's Bluetooth settings doesn't make it appear in the a
 Android requires location permission for this app to scan for Bluetooth sensors.
 
 **Where did my workouts go?**
-See the list above. Everything except Free Ride came from Kinetic's servers.
+See the list above. Everything except Free Ride came from Kinetic's servers. You can add your own workouts instead (next question).
+
+**How do I add structured workouts?**
+1. Get the workout as an `.erg` file (target watts) or an `.mrc` file (target % of FTP):
+   - **TrainingPeaks** and **intervals.icu** can export or download workouts in these formats.
+   - **Garmin Connect** workouts: export the workout as a `.fit` file, then convert it with the free converter at [whatsonzwift.com/convert/workouts](https://whatsonzwift.com/convert/workouts).
+   - **MyWhoosh** can't export its workouts.
+2. Put the file on your phone, for example by downloading it or emailing it to yourself.
+3. Tap the file in your phone's **Files** app and choose **Import Custom Workout** (Kinetic Fit). The workout opens; tap **Warmup** to ride it.
+4. Later, find it under **Workout → Favorites**.
+
+Kinetic Fit may also appear in the "Open with" list for ordinary text files. Just pick another app for those.
 
 **How do I use Free Ride?**
 Tap **Workout** on the main screen, then **Free Ride**, then **Warmup**. Skip the 10-minute warm-up if you like. During the ride, tap **Lap** to start a new segment. When you're done, tap **Pause → End → Results**.
+
+**Are my rides saved?**
+Yes. Finished rides appear on the main screen; scroll down to see them. Tap one to see its results again, including each lap. Rides are stored only on your phone: updating the app keeps them, but uninstalling deletes them.
+
+**Can I upload rides to Strava?**
+Not directly. Kinetic's Strava connection has reached Strava's limit on connected athletes, so **Export To Strava** can't be linked, and only Kinetic could fix that. Instead, open the ride, tap **⋮ → Export To File**, and send the `.fit` file to yourself (email or Drive). Then upload it at strava.com (**Upload activity → File**). TrainingPeaks and intervals.icu accept the same file. The other online export options in the menu are untested and probably don't work.
 
 ## Understanding spindown calibration
 
@@ -124,13 +143,18 @@ This repository is the Kinetic Fit 1.4.23 APK (`com.kinetic.fit`, versionCode 22
 - `smali_classes2/com/kinetic/fit/ui/login/LoginDispathActivity.smali`: `runDispatch()` skips the login and sync screens and opens `RootActivity` directly (via a new `getRootIntent()`).
 - `smali_classes2/com/kinetic/fit/data/realm_objects/Profile.smali`: `current()` creates a placeholder "admin" profile if none exists. `getCurrentName()` and `getMainEmail()` return placeholder values.
 - `Profile.ensureOfflineDefaults()` (new, called from `runDispatch()` on every launch) fills empty profile fields with defaults: FTP 200, max/resting heart rate 185/60, 70 kg, 175 cm, birth date 1990-01-01, plus auto-calculated power and heart zones. Without zones, Free Ride crashes (`WorkoutGraphView` reads the last power zone). Without a birth date, the Profile screen crashes.
+- Workout import (1.0.3), in `ImportWorkoutActivity`:
+  - The importer saves locally with a `local-<uuid>` ID instead of waiting for Kinetic's server to assign one, adds the workout to Favorites, and shows a message instead of crashing on unreadable files.
+  - `WorkoutParser.parse()` detects `.erg`/`.mrc` from the file's `_display_name` rather than the URI, whose last segment is an ID like `msf:123` on Android 10 and later.
+  - `OverviewActivity.onWarmUpButton()` skips the subscription and free-custom-workout gate.
+  - The manifest also accepts `application/octet-stream` and `text/plain` content URIs, and `SEND` shares.
 - Drawable files whose names contained `$` (`$avd_hide_password__0.xml` etc.) were renamed, with references updated in `res/values/public.xml` and `res/drawable/avd_{hide,show}_password.xml`, so the APK rebuilds.
 
 ### Build and install
 
 Requires apktool and the Android SDK build tools (`aapt2`, `zipalign`, `jarsigner`). The `--use-aapt2` flag is required.
 
-Note: this repo is missing about 29 non-code files from the original APK because `.gitignore` excludes them (for example `google.jks` and joda-time's `*.properties`). A full rebuild drops them. Release APKs are built by replacing only `classes2.dex` in the previous release APK, then running `zipalign` and `apksigner`.
+Note: this repo is missing about 29 non-code files from the original APK because `.gitignore` excludes them (for example `google.jks` and joda-time's `*.properties`). A plain rebuild drops them. Release APKs are built with `apktool b`; then the missing files are copied in from the previous release APK, followed by `zipalign` and `apksigner` with the same key, so updates install over older versions.
 
 ```bash
 apktool b . -o kinetic-fit-bypass.apk --use-aapt2

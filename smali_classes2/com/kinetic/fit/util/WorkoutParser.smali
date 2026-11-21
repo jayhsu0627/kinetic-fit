@@ -111,103 +111,94 @@
 .end method
 
 .method public static parse(Landroid/net/Uri;Ljava/lang/Integer;Landroid/content/Context;)Lcom/kinetic/fit/util/WorkoutParser$WorkoutDefinition;
-    .locals 7
+    .locals 8
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
         }
     .end annotation
 
-    .line 81
-    invoke-static {p0}, Lcom/kinetic/fit/util/WorkoutParser;->canParse(Landroid/net/Uri;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    .line 84
+    # OFFLINE FIX - detect .erg/.mrc from the file's real name (_display_name),
+    # not the URI's last path segment (which is an ID like "msf:123" on many
+    # phones), and use the name without extension as the workout title.
     invoke-virtual {p2}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+    move-result-object v7
 
-    move-result-object v0
+    const/4 v0, 0x0
 
-    invoke-static {p0, v0}, Lcom/kinetic/fit/util/WorkoutParser;->readTextFile(Landroid/net/Uri;Landroid/content/ContentResolver;)Ljava/util/ArrayList;
-
-    move-result-object v0
-
-    .line 85
-    invoke-virtual {p2}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
-
+    :try_q_start
+    move-object v1, v7
+    move-object v2, p0
+    const/4 v3, 0x0
+    const/4 v4, 0x0
+    const/4 v5, 0x0
+    const/4 v6, 0x0
+    invoke-virtual/range {v1 .. v6}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
     move-result-object v1
+    if-eqz v1, :q_done
+    invoke-interface {v1}, Landroid/database/Cursor;->moveToFirst()Z
+    move-result v2
+    if-eqz v2, :q_close
+    const-string v2, "_display_name"
+    invoke-interface {v1, v2}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    move-result v2
+    if-ltz v2, :q_close
+    invoke-interface {v1, v2}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    move-result-object v0
+    :q_close
+    invoke-interface {v1}, Landroid/database/Cursor;->close()V
+    :q_done
+    :try_q_end
+    .catch Ljava/lang/Exception; {:try_q_start .. :try_q_end} :q_fail
+    goto :name_check
+
+    :q_fail
+    move-exception v1
+    const/4 v0, 0x0
+
+    :name_check
+    if-nez v0, :name_ok
+    invoke-virtual {p0}, Landroid/net/Uri;->getLastPathSegment()Ljava/lang/String;
+    move-result-object v0
+    if-nez v0, :name_ok
+    const-string v0, ""
+    :name_ok
+
+    const-string v1, "."
+    invoke-virtual {v0, v1}, Ljava/lang/String;->lastIndexOf(Ljava/lang/String;)I
+    move-result v1
+    if-ltz v1, :bad_ext
+    add-int/lit8 v2, v1, 0x1
+    invoke-virtual {v0, v2}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+    move-result-object v2
+    invoke-virtual {v2}, Ljava/lang/String;->toLowerCase()Ljava/lang/String;
+    move-result-object v2
+    const-string v3, "mrc"
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    move-result v3
+    if-nez v3, :ext_ok
+    const-string v3, "erg"
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    move-result v3
+    if-eqz v3, :bad_ext
+    :ext_ok
 
     const/4 v3, 0x0
+    invoke-virtual {v0, v3, v1}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+    move-result-object v3
 
-    const/4 v4, 0x0
+    invoke-static {p0, v7}, Lcom/kinetic/fit/util/WorkoutParser;->readTextFile(Landroid/net/Uri;Landroid/content/ContentResolver;)Ljava/util/ArrayList;
+    move-result-object v4
 
-    const/4 v5, 0x0
+    invoke-static {v2, v4, v3, v0, p1}, Lcom/kinetic/fit/util/WorkoutParser;->parseLines(Ljava/lang/String;Ljava/util/ArrayList;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;)Lcom/kinetic/fit/util/WorkoutParser$WorkoutDefinition;
+    move-result-object v5
+    return-object v5
 
-    const/4 v6, 0x0
-
-    move-object v2, p0
-
-    invoke-virtual/range {v1 .. v6}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
-
-    move-result-object p2
-
-    .line 86
-    invoke-interface {p2}, Landroid/database/Cursor;->moveToFirst()Z
-
-    const-string v1, "_display_name"
-
-    .line 87
-    invoke-interface {p2, v1}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
-
-    move-result v1
-
-    invoke-interface {p2, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
-
-    move-result-object v1
-
-    .line 88
-    invoke-interface {p2}, Landroid/database/Cursor;->close()V
-
-    .line 89
-    invoke-virtual {p0}, Landroid/net/Uri;->getLastPathSegment()Ljava/lang/String;
-
-    move-result-object p0
-
-    const-string p2, "\\."
-
-    .line 90
-    invoke-virtual {p0, p2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-virtual {p0, p2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
-
-    move-result-object p2
-
-    array-length p2, p2
-
-    add-int/lit8 p2, p2, -0x1
-
-    aget-object p2, v2, p2
-
-    .line 91
-    invoke-static {p2, v0, p0, v1, p1}, Lcom/kinetic/fit/util/WorkoutParser;->parseLines(Ljava/lang/String;Ljava/util/ArrayList;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;)Lcom/kinetic/fit/util/WorkoutParser$WorkoutDefinition;
-
-    move-result-object p0
-
-    return-object p0
-
-    .line 82
-    :cond_0
-    new-instance p0, Ljava/lang/Error;
-
-    const-string p1, "Invalid File Extension"
-
-    invoke-direct {p0, p1}, Ljava/lang/Error;-><init>(Ljava/lang/String;)V
-
-    throw p0
+    :bad_ext
+    new-instance v5, Ljava/lang/Exception;
+    const-string v6, "Not an .erg or .mrc workout file"
+    invoke-direct {v5, v6}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
+    throw v5
 .end method
 
 .method private static parseLines(Ljava/lang/String;Ljava/util/ArrayList;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;)Lcom/kinetic/fit/util/WorkoutParser$WorkoutDefinition;

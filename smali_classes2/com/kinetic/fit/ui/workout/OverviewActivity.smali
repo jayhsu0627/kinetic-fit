@@ -1188,48 +1188,12 @@
 .end method
 
 .method private final onWarmUpButton()V
-    .locals 2
+    .locals 0
 
-    .line 294
-    iget-boolean v0, p0, Lcom/kinetic/fit/ui/workout/OverviewActivity;->hasSubscription:Z
-
-    if-nez v0, :cond_1
-
-    iget-boolean v0, p0, Lcom/kinetic/fit/ui/workout/OverviewActivity;->isCustomWorkout:Z
-
-    if-eqz v0, :cond_1
-
-    iget-boolean v0, p0, Lcom/kinetic/fit/ui/workout/OverviewActivity;->inFreeCuston:Z
-
-    if-nez v0, :cond_1
-
-    .line 295
-    iget-object v0, p0, Lcom/kinetic/fit/ui/workout/OverviewActivity;->freeCustom:Ljava/util/List;
-
-    invoke-interface {v0}, Ljava/util/List;->size()I
-
-    move-result v0
-
-    const/4 v1, 0x3
-
-    if-gt v0, v1, :cond_0
-
-    .line 296
-    invoke-direct {p0}, Lcom/kinetic/fit/ui/workout/OverviewActivity;->confirmAddToFreeCustom()V
-
-    goto :goto_0
-
-    .line 298
-    :cond_0
-    invoke-direct {p0}, Lcom/kinetic/fit/ui/workout/OverviewActivity;->needsSubscriptionToContinue()V
-
-    goto :goto_0
-
-    .line 301
-    :cond_1
+    # OFFLINE FIX - subscriptions can no longer be bought, so skip the
+    # "free custom workouts" limit and subscription prompt and always start
     invoke-direct {p0}, Lcom/kinetic/fit/ui/workout/OverviewActivity;->startWarmup()V
 
-    :goto_0
     return-void
 .end method
 

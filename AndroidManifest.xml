@@ -92,6 +92,20 @@
                 <data android:host="*" android:mimeType="text/plain" android:pathPattern=".*\\.mrc" android:scheme="content"/>
                 <data android:host="*" android:mimeType="text/plain" android:pathPattern=".*\\.erg" android:scheme="content"/>
             </intent-filter>
+            <!-- OFFLINE FIX: file managers label .erg/.mrc as a generic binary file, and on
+                 newer Android the file's address has no extension, so accept those too.
+                 The importer checks the real file name and rejects anything else. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/octet-stream" android:scheme="content"/>
+                <data android:mimeType="text/plain" android:scheme="content"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/octet-stream"/>
+            </intent-filter>
         </activity>
         <activity android:label="Kinetic" android:launchMode="singleTop" android:name="com.kinetic.fit.ui.login.LoginActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.kinetic.fit.ui.settings.sensors.NotificationActivity"/>
